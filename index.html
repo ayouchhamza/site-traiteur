@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Safran — Traiteur à Marrakech</title>
+<meta name="description" content="Maison Safran, traiteur haut de gamme à Marrakech : mariages, fiançailles, événements d’entreprise et réceptions privées. Cuisine marocaine revisitée, buffets, cocktails dînatoires et pâtisseries.">
+<!-- Site de démonstration aux données fictives : retirer cette ligne une fois les vraies informations en place. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F1C19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Maison Safran — L’art de recevoir, à la marocaine">
+<meta property="og:description" content="Maison Safran, traiteur haut de gamme à Marrakech : mariages, fiançailles, événements d’entreprise et réceptions privées. Cuisine marocaine revisitée, buffets, cocktails dînatoires et pâtisseries.">
+<meta property="og:image" content="https://ayouchhamza.github.io/site-traiteur/images/hero-table.jpg">
+<meta property="og:url" content="https://ayouchhamza.github.io/site-traiteur/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="images/hero-table-m.jpg" media="(max-width: 760px)">
+<link rel="preload" as="image" href="images/hero-table.jpg" media="(min-width: 761px)">
+<script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer></script>
+<script src="js/app.js" defer></script>
+</head>
+<body>
+<div id="app" v-cloak class="ms-root" :dir="dir" :lang="lang" style="background:#FBF7F0;color:#26231F;font-family:'DM Sans','IBM Plex Sans Arabic',system-ui,sans-serif;font-size:16px;line-height:1.6;">
+<div class="ms" style="container-type:inline-size;container-name:ms;">
+
+<header :class="headClass" style="position:sticky;top:0;z-index:40;">
+<div class="ms-wrap ms-headbar" style="display:flex;align-items:center;justify-content:space-between;gap:20px;">
+<a href="#accueil" :aria-label="brand" style="display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none;color:inherit;">
+<svg class="ms-hide-m" width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" style="flex-shrink:0;"><path d="M9 9h16v16H9z"></path><path d="M17 5.7 28.3 17 17 28.3 5.7 17z"></path><circle cx="17" cy="17" r="3"></circle></svg>
+<span style="display:flex;flex-direction:column;gap:5px;line-height:1;">
+<span class="ms-serif ms-brand" style="font-size:25px;font-weight:600;letter-spacing:.01em;">{{brand}}</span>
+<span class="ms-eyebrow ms-hide-m" style="font-size:10px;opacity:.8;">{{t.tagline}}</span>
+</span>
+</a>
+<nav class="ms-navlinks" :aria-label="t.navAria" style="align-items:center;gap:30px;">
+<template v-for="n in t.nav">
+<a class="ms-navlink" :href="`#${n.id}`" style="font-size:14px;font-weight:500;text-decoration:none;color:inherit;">{{n.label}}</a>
+</template>
+</nav>
+<div style="display:flex;align-items:center;gap:10px;">
+<div role="group" :aria-label="t.langLabel" style="display:flex;align-items:center;padding:3px;border:1px solid currentColor;border-radius:999px;">
+<button type="button" @click="setFr" :aria-pressed="isFr" lang="fr" :style="`height:38px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:${frBg};color:${frFg};font:inherit;font-size:13px;font-weight:600;cursor:pointer;`">FR</button>
+<button type="button" @click="setAr" :aria-pressed="isAr" lang="ar" :style="`height:38px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:${arBg};color:${arFg};font:inherit;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;font-weight:600;cursor:pointer;`">عربي</button>
+</div>
+<a class="ms-head-cta ms-btn" href="#devis" style="align-items:center;height:46px;padding:0 22px;border-radius:999px;background:#A9512F;color:#FBF7F0;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;">{{t.cta}}</a>
+<button class="ms-burger" type="button" @click="toggleMenu" :aria-expanded="menuExpanded" aria-controls="ms-mobmenu" :aria-label="menuLabel" style="width:46px;height:46px;align-items:center;justify-content:center;padding:0;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;cursor:pointer;">
+<template v-if="menuClosed"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></template>
+<template v-if="menuOpen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></template>
+</button>
+</div>
+</div>
+<template v-if="menuOpen">
+<div id="ms-mobmenu" style="position:absolute;top:100%;left:0;right:0;background:#FBF7F0;color:#26231F;border-top:1px solid #E6D9C3;box-shadow:0 30px 40px -24px rgba(38,35,31,.35);">
+<nav class="ms-wrap" :aria-label="t.navAria" style="display:flex;flex-direction:column;padding-top:8px;padding-bottom:24px;">
+<template v-for="n in t.nav">
+<a class="ms-serif" :href="`#${n.id}`" @click="closeMenu" style="display:flex;align-items:center;justify-content:space-between;min-height:56px;border-bottom:1px solid #EDE3D2;font-size:24px;font-weight:500;text-decoration:none;color:#26231F;">{{n.label}}<svg class="ms-flip" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A9512F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></a>
+</template>
+<a class="ms-btn" href="#devis" @click="closeMenu" style="margin-top:20px;display:flex;align-items:center;justify-content:center;height:54px;border-radius:999px;background:#A9512F;color:#FBF7F0;font-weight:600;text-decoration:none;">{{t.cta}}</a>
+</nav>
+</div>
+</template>
+</header>
+
+<section id="accueil" style="position:relative;min-height:clamp(620px,92vh,820px);display:flex;align-items:center;overflow:hidden;background:#231D19;color:#FBF7F0;">
+<div class="ms-par" aria-hidden="true" style="position:absolute;top:-6%;bottom:-14%;left:0;right:0;background:#3A2A1F;">
+<picture><source media="(max-width: 760px)" srcset="images/hero-table-m.jpg"><img src="images/hero-table.jpg" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 58%;"></picture>
+</div>
+<div aria-hidden="true" style="position:absolute;inset:0;background:rgba(24,18,14,.5);"></div>
+<div class="ms-hero-shade" aria-hidden="true" style="position:absolute;inset:0;"></div>
+<div class="ms-wrap ms-hero-in" style="position:relative;">
+<div style="max-width:760px;">
+<p class="ms-eyebrow ms-rv" style="margin:0 0 22px;display:flex;align-items:center;gap:14px;color:#E3C48F;"><span aria-hidden="true" style="display:block;width:36px;height:1px;background:#E3C48F;"></span>{{t.hero.eyebrow}}</p>
+<h1 class="ms-h ms-serif" style="margin:0;font-size:clamp(46px,6.8cqi,98px);font-weight:500;">{{t.hero.h1a}}<br><em class="ms-em" style="font-weight:400;color:#EBCB95;">{{t.hero.h1b}}</em></h1>
+<p style="margin:28px 0 0;max-width:600px;font-size:clamp(16px,1.5cqi,19px);line-height:1.65;color:rgba(251,247,240,.86);">{{t.hero.lead}}</p>
+<div class="ms-hero-ctas" style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;">
+<a class="ms-btn ms-arrowlink" href="#devis" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border-radius:999px;background:#A9512F;color:#FBF7F0;font-size:16px;font-weight:600;text-decoration:none;">{{t.cta}}<svg class="ms-arrow ms-flip" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="ms-btn" :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;border:1px solid rgba(251,247,240,.55);background:rgba(251,247,240,.07);color:#FBF7F0;font-size:16px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.hero.wa}}</a>
+</div>
+<ul class="ms-hide-m" style="margin:36px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;color:rgba(251,247,240,.8);">
+<template v-for="p in t.hero.points">
+<li style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:block;width:6px;height:6px;transform:rotate(45deg);background:#D1AE74;"></span>{{p}}</li>
+</template>
+</ul>
+</div>
+</div>
+</section>
+
+<div class="ms-wrap" style="position:relative;z-index:2;margin-top:-64px;">
+<div class="ms-stats ms-rv" style="gap:1px;background:#E6D9C3;border:1px solid #E6D9C3;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -36px rgba(38,35,31,.45);">
+<template v-for="s in stats">
+<div class="ms-stat" style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;">
+<span dir="ltr" style="display:inline-flex;align-items:baseline;gap:4px;align-self:flex-start;">
+<span class="ms-serif" style="font-size:clamp(34px,4cqi,52px);font-weight:500;line-height:1;color:#26231F;">{{s.n}}</span>
+<span class="ms-serif" style="font-size:26px;line-height:1;color:#A9512F;">{{s.suf}}</span>
+</span>
+<span style="font-size:14px;line-height:1.45;color:#5B544B;">{{s.l}}</span>
+<template v-if="s.stars">
+<span aria-hidden="true" style="display:flex;gap:3px;color:#A27C42;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg></span>
+</template>
+</div>
+</template>
+</div>
+</div>
+
+<section id="prestations" class="ms-sec">
+<div class="ms-wrap">
+<div class="ms-sechead ms-rv" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 64px;">
+<div style="max-width:620px;">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.services.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.services.title}}</h2>
+</div>
+<p style="margin:0;max-width:440px;font-size:16px;color:#5B544B;">{{t.services.intro}}</p>
+</div>
+<div class="ms-cards ms-rv">
+<article class="ms-card" style="display:flex;flex-direction:column;gap:20px;">
+<div style="border-radius:16px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/svc-mariage.jpg" :alt="svc.mariage.photo" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-inline:2px;">
+<h3 class="ms-h ms-serif" style="margin:0;font-size:28px;font-weight:500;line-height:1.15;">{{svc.mariage.title}}</h3>
+<p style="margin:0;font-size:15px;line-height:1.62;color:#5B544B;">{{svc.mariage.text}}</p>
+<a class="ms-arrowlink" href="#devis" @click="svc.mariage.pick" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:600;color:#8E4226;text-decoration:none;">{{svc.mariage.cta}}<svg class="ms-arrow ms-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</article>
+<article class="ms-card" style="display:flex;flex-direction:column;gap:20px;">
+<div style="border-radius:16px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/svc-entreprise.jpg" :alt="svc.entreprise.photo" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-inline:2px;">
+<h3 class="ms-h ms-serif" style="margin:0;font-size:28px;font-weight:500;line-height:1.15;">{{svc.entreprise.title}}</h3>
+<p style="margin:0;font-size:15px;line-height:1.62;color:#5B544B;">{{svc.entreprise.text}}</p>
+<a class="ms-arrowlink" href="#devis" @click="svc.entreprise.pick" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:600;color:#8E4226;text-decoration:none;">{{svc.entreprise.cta}}<svg class="ms-arrow ms-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</article>
+<article class="ms-card" style="display:flex;flex-direction:column;gap:20px;">
+<div style="border-radius:16px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/svc-privee.jpg" :alt="svc.privee.photo" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-inline:2px;">
+<h3 class="ms-h ms-serif" style="margin:0;font-size:28px;font-weight:500;line-height:1.15;">{{svc.privee.title}}</h3>
+<p style="margin:0;font-size:15px;line-height:1.62;color:#5B544B;">{{svc.privee.text}}</p>
+<a class="ms-arrowlink" href="#devis" @click="svc.privee.pick" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:600;color:#8E4226;text-decoration:none;">{{svc.privee.cta}}<svg class="ms-arrow ms-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</article>
+<article class="ms-card" style="display:flex;flex-direction:column;gap:20px;">
+<div style="border-radius:16px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/svc-patisserie.jpg" :alt="svc.sucre.photo" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-inline:2px;">
+<h3 class="ms-h ms-serif" style="margin:0;font-size:28px;font-weight:500;line-height:1.15;">{{svc.sucre.title}}</h3>
+<p style="margin:0;font-size:15px;line-height:1.62;color:#5B544B;">{{svc.sucre.text}}</p>
+<a class="ms-arrowlink" href="#devis" @click="svc.sucre.pick" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:600;color:#8E4226;text-decoration:none;">{{svc.sucre.cta}}<svg class="ms-arrow ms-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="formules" class="ms-sec" style="background:#F4EDE1;">
+<div class="ms-wrap">
+<div class="ms-sechead ms-rv" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 64px;">
+<div style="max-width:620px;">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.plans.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.plans.title}}</h2>
+</div>
+<p style="margin:0;max-width:440px;font-size:16px;color:#5B544B;">{{t.plans.intro}}</p>
+</div>
+<div class="ms-plans ms-rv" style="padding-top:16px;">
+<template v-for="p in plans">
+<article :class="p.cls" :style="`position:relative;display:flex;flex-direction:column;padding:38px 32px 32px;border-radius:22px;background:${p.bg};color:${p.fg};border:1px solid ${p.border};box-shadow:${p.shadow};`">
+<template v-if="p.featured">
+<span style="position:absolute;top:-14px;inset-inline-start:32px;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 14px;border-radius:999px;background:#A9512F;color:#FBF7F0;font-size:12px;font-weight:600;"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg>{{t.plans.featured}}</span>
+</template>
+<h3 class="ms-h ms-serif" style="margin:0;font-size:36px;font-weight:500;">{{p.name}}</h3>
+<p :style="`margin:8px 0 0;min-height:3.2em;font-size:15px;line-height:1.55;color:${p.muted};`">{{p.desc}}</p>
+<div :style="`margin-top:24px;padding-block:22px;border-top:1px solid ${p.line};border-bottom:1px solid ${p.line};`">
+<span :style="`display:block;font-size:13px;color:${p.muted};`">{{t.plans.from}}</span>
+<div style="margin-top:6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;">
+<span class="ms-serif" style="font-size:52px;font-weight:500;line-height:1;">{{p.price}}</span>
+<span style="font-size:16px;font-weight:600;">{{t.plans.unit}}</span>
+<span :style="`font-size:14px;color:${p.muted};`">{{t.plans.per}}</span>
+</div>
+</div>
+<p class="ms-eyebrow" :style="`margin:22px 0 14px;font-size:11px;color:${p.gold};`">{{p.head}}</p>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;flex-grow:1;">
+<template v-for="i in p.incl">
+<li style="display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.5;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" :stroke="p.gold" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px;"><path d="m5 12.5 4.2 4.2L19 7"></path></svg><span>{{i}}</span></li>
+</template>
+</ul>
+<a class="ms-btn" href="#devis" @click="p.pick" :style="`margin-top:30px;display:flex;align-items:center;justify-content:center;height:52px;border-radius:999px;border:1px solid ${p.btnBorder};background:${p.btnBg};color:${p.btnFg};font-size:15px;font-weight:600;text-decoration:none;`">{{t.plans.cta}}</a>
+</article>
+</template>
+</div>
+<p style="margin:36px auto 0;max-width:700px;text-align:center;font-size:14px;line-height:1.6;color:#5B544B;">{{t.plans.note}}</p>
+</div>
+</section>
+
+<section id="galerie" class="ms-sec">
+<div class="ms-wrap">
+<div class="ms-sechead ms-rv" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 64px;">
+<div style="max-width:620px;">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.gallery.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.gallery.title}}</h2>
+<p style="margin:18px 0 0;max-width:520px;font-size:16px;color:#5B544B;">{{t.gallery.intro}}</p>
+</div>
+<a class="ms-arrowlink" :href="instaUrl" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;font-weight:600;color:#8E4226;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"></circle></svg>{{t.gallery.insta}} <span dir="ltr">@{{handle}}</span></a>
+</div>
+<div role="group" :aria-label="t.gallery.filterLabel" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+<template v-for="f in galFilters">
+<button type="button" @click="f.pick" :aria-pressed="f.pressed" :style="`height:44px;padding:0 18px;border-radius:999px;border:1px solid ${f.border};background:${f.bg};color:${f.fg};font:inherit;font-size:14px;font-weight:500;cursor:pointer;`">{{f.label}}</button>
+</template>
+</div>
+<div class="ms-gal">
+<template v-if="gal.g1.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-01-tajine.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g1.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g2.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-02-salades.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g2.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g3.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-03-table.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g3.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g4.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-04-the.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g4.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g5.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-05-bouchees.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g5.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g6.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-06-agneau.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g6.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g7.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-07-chemin.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g7.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g8.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-08-decoupe.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g8.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g9.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-09-kefta.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g9.cap}}</figcaption>
+</figure>
+</template>
+<template v-if="gal.g10.show">
+<figure class="ms-card ms-rv" style="position:relative;margin:0;border-radius:14px;overflow:hidden;background:#E6D9C3;">
+<img class="ms-ph" src="images/gal-10-desserts.jpg" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;">
+<figcaption style="position:absolute;bottom:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 11px;border-radius:999px;background:rgba(20,17,14,.55);font-size:12px;line-height:1.3;color:#FBF7F0;">{{gal.g10.cap}}</figcaption>
+</figure>
+</template>
+</div>
+</div>
+</section>
+
+<section id="deroule" class="ms-sec" style="position:relative;overflow:hidden;background:#1F1C19;color:#F3ECE0;">
+<svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;opacity:.13;mask-image:radial-gradient(55% 80% at 100% 0%, #000 0%, transparent 70%);"><defs><pattern id="msp-steps" width="64" height="64" patternUnits="userSpaceOnUse"><g fill="none" stroke="#D1AE74" stroke-width="1"><path d="M20 20h24v24H20z"></path><path d="M32 15 49 32 32 49 15 32z"></path><path d="M32 0v15M32 49v15M0 32h15M49 32h15"></path><path d="M0-8 8 0 0 8-8 0zM64-8l8 8-8 8-8-8zM0 56l8 8-8 8-8-8zM64 56l8 8-8 8-8-8z"></path></g></pattern></defs><rect width="100%" height="100%" fill="url(#msp-steps)"></rect></svg>
+<div class="ms-wrap" style="position:relative;">
+<div class="ms-sechead ms-rv" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 64px;">
+<div style="max-width:640px;">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#D1AE74;">{{t.steps.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.steps.title}}</h2>
+<p style="margin:18px 0 0;font-size:16px;color:#BDB3A3;">{{t.steps.intro}}</p>
+</div>
+<a class="ms-btn" :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid rgba(243,236,224,.4);color:#F3ECE0;font-size:15px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.steps.cta}}</a>
+</div>
+<ol class="ms-steps ms-rv" style="margin:0;padding:0;list-style:none;">
+<template v-for="s in t.steps.items">
+<li style="position:relative;display:flex;flex-direction:column;gap:12px;padding-top:28px;border-top:1px solid rgba(209,174,116,.35);">
+<span aria-hidden="true" style="position:absolute;top:-5px;inset-inline-start:0;display:block;width:9px;height:9px;transform:rotate(45deg);background:#D1AE74;"></span>
+<span class="ms-serif" aria-hidden="true" style="font-size:56px;line-height:1;font-weight:400;color:#D1AE74;">{{s.n}}</span>
+<h3 class="ms-h ms-serif" style="margin:0;font-size:27px;font-weight:500;">{{s.title}}</h3>
+<p style="margin:0;font-size:15px;line-height:1.65;color:#BDB3A3;">{{s.text}}</p>
+</li>
+</template>
+</ol>
+</div>
+</section>
+
+<section id="avis" class="ms-sec">
+<div class="ms-wrap ms-split" style="align-items:center;">
+<div class="ms-rv">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.testi.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.testi.title}}</h2>
+<div style="margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;">
+<span aria-hidden="true" style="display:flex;gap:3px;color:#A27C42;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg></span>
+<span style="font-size:15px;color:#5B544B;">{{t.testi.summary}}</span>
+</div>
+</div>
+<figure class="ms-rv ms-quote-card" style="position:relative;margin:0;border-radius:24px;background:#F4EDE1;">
+<svg width="52" height="52" viewBox="0 0 24 24" fill="#C9A46A" aria-hidden="true" style="display:block;"><path d="M10 7c-3.3 1.2-5 3.7-5 7.2V18h5v-5H7.6c.1-2 1.1-3.4 3-4.3L10 7zm9 0c-3.3 1.2-5 3.7-5 7.2V18h5v-5h-2.4c.1-2 1.1-3.4 3-4.3L19 7z"></path></svg>
+<blockquote style="margin:18px 0 0;">
+<p class="ms-serif ms-em ms-quote-text" style="margin:0;font-size:clamp(23px,2.4cqi,31px);line-height:1.38;color:#26231F;">{{slide.quote}}</p>
+</blockquote>
+<figcaption style="margin-top:28px;display:flex;align-items:center;gap:16px;">
+<span aria-hidden="true" :style="`flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:999px;background:${slide.bg};color:rgba(251,247,240,.9);`"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"></circle><path d="M5 20c1.2-3.5 3.8-5.2 7-5.2s5.8 1.7 7 5.2"></path></svg></span>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-size:16px;font-weight:600;">{{slide.name}}</span>
+<span style="font-size:14px;color:#5B544B;">{{slide.event}}</span>
+</span>
+</figcaption>
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #E2D4BC;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+<div style="display:flex;align-items:center;">
+<template v-for="d in dots">
+<button type="button" @click="d.go" :aria-label="d.label" :aria-current="d.current" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;cursor:pointer;"><span :style="`display:block;width:${d.w};height:4px;border-radius:4px;background:${d.bg};transition:width .3s ease,background-color .3s ease;`"></span></button>
+</template>
+</div>
+<div style="display:flex;gap:10px;">
+<button type="button" @click="prevSlide" :aria-label="t.testi.prev" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:1px solid #26231F;border-radius:999px;background:transparent;color:#26231F;cursor:pointer;"><svg class="ms-flip" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button>
+<button type="button" @click="nextSlide" :aria-label="t.testi.next" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:1px solid #26231F;border-radius:999px;background:#26231F;color:#FBF7F0;cursor:pointer;"><svg class="ms-flip" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
+</div>
+</div>
+</figure>
+</div>
+</section>
+
+<section id="faq" class="ms-sec" style="background:#F4EDE1;">
+<div class="ms-wrap ms-split">
+<div class="ms-rv">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.faq.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.faq.title}}</h2>
+<p style="margin:18px 0 0;font-size:16px;color:#5B544B;">{{t.faq.intro}}</p>
+<div style="margin-top:32px;display:flex;flex-direction:column;gap:10px;padding:26px;border-radius:18px;background:#FBF7F0;border:1px solid #E6D9C3;">
+<p class="ms-serif" style="margin:0;font-size:25px;font-weight:600;line-height:1.2;">{{t.faq.asideTitle}}</p>
+<p style="margin:0;font-size:15px;color:#5B544B;">{{t.faq.asideText}}</p>
+<a class="ms-btn" :href="waHello" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;background:#168F4C;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.faq.asideCta}}</a>
+</div>
+</div>
+<div class="ms-rv" style="border-top:1px solid #D9CAB0;">
+<template v-for="f in faqs">
+<div style="border-bottom:1px solid #D9CAB0;">
+<h3 style="margin:0;">
+<button type="button" :id="f.bid" @click="f.toggle" :aria-expanded="f.expanded" :aria-controls="f.pid" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border:0;background:transparent;color:#26231F;font:inherit;text-align:start;cursor:pointer;">
+<span class="ms-serif" style="font-size:clamp(20px,2cqi,24px);font-weight:600;line-height:1.3;">{{f.q}}</span>
+<span aria-hidden="true" style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;border:1px solid #CDBA9A;color:#8E4226;">
+<template v-if="f.closed"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5v14"></path></svg></template>
+<template v-if="f.open"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"></path></svg></template>
+</span>
+</button>
+</h3>
+<template v-if="f.open">
+<div :id="f.pid" style="padding-bottom:24px;padding-inline-end:56px;">
+<p style="margin:0;font-size:16px;line-height:1.7;color:#5B544B;">{{f.a}}</p>
+</div>
+</template>
+</div>
+</template>
+</div>
+</div>
+</section>
+
+<section id="devis" class="ms-sec">
+<div class="ms-wrap ms-split" style="align-items:start;">
+<div class="ms-rv">
+<p class="ms-eyebrow" style="margin:0 0 18px;color:#84622E;">{{t.quote.eyebrow}}</p>
+<h2 class="ms-h ms-serif" style="margin:0;font-size:clamp(34px,4.4cqi,58px);font-weight:500;">{{t.quote.title}}</h2>
+<p style="margin:18px 0 0;font-size:16px;color:#5B544B;">{{t.quote.intro}}</p>
+<ul style="margin:32px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;">
+<li style="border-bottom:1px solid #EAE0CE;"><a :href="telHref" style="display:flex;align-items:center;gap:16px;padding:14px 0;text-decoration:none;color:#26231F;"><span aria-hidden="true" style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:#F4EDE1;color:#8E4226;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><span style="display:flex;flex-direction:column;"><span style="font-size:13px;color:#6B6358;">{{t.quote.tel}}</span><span dir="ltr" style="font-size:17px;font-weight:600;align-self:flex-start;">{{phone}}</span></span></a></li>
+<li style="border-bottom:1px solid #EAE0CE;"><a :href="waHello" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:16px;padding:14px 0;text-decoration:none;color:#26231F;"><span aria-hidden="true" style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:#E3F0E6;color:#14783F;"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg></span><span style="display:flex;flex-direction:column;"><span style="font-size:13px;color:#6B6358;">{{t.quote.wa}}</span><span style="font-size:17px;font-weight:600;">{{t.quote.waV}}</span></span></a></li>
+<li style="border-bottom:1px solid #EAE0CE;"><a :href="mailHref" style="display:flex;align-items:center;gap:16px;padding:14px 0;text-decoration:none;color:#26231F;"><span aria-hidden="true" style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:#F4EDE1;color:#8E4226;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></span><span style="display:flex;flex-direction:column;"><span style="font-size:13px;color:#6B6358;">{{t.quote.mail}}</span><span dir="ltr" style="font-size:17px;font-weight:600;align-self:flex-start;">{{email}}</span></span></a></li>
+<li style="display:flex;align-items:center;gap:16px;padding:14px 0;"><span aria-hidden="true" style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:#F4EDE1;color:#8E4226;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M4 10h16M8 3v4M16 3v4"></path></svg></span><span style="display:flex;flex-direction:column;"><span style="font-size:13px;color:#6B6358;">{{t.quote.visit}}</span><span style="font-size:17px;font-weight:600;">{{t.quote.visitV}}</span></span></li>
+</ul>
+<ul style="margin:28px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;">
+<template v-for="a in t.quote.assure">
+<li style="display:flex;align-items:center;gap:12px;font-size:15px;color:#3D3832;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A27C42" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="m5 12.5 4.2 4.2L19 7"></path></svg>{{a}}</li>
+</template>
+</ul>
+</div>
+<div id="devis-form" class="ms-rv ms-form-card" style="border-radius:24px;background:#FFFDF8;border:1px solid #E6D9C3;box-shadow:0 40px 80px -50px rgba(38,35,31,.35);">
+<template v-if="notSent">
+<form @submit="submit" class="ms-form-grid">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-name" style="font-size:13px;font-weight:600;">{{t.form.name}} <span aria-hidden="true" style="color:#A9512F;">*</span></label>
+<input class="ms-in" id="ms-name" name="name" type="text" required="required" :value="form.name" @input="onField" :placeholder="t.form.namePh" style="width:100%;height:52px;padding-inline:16px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-phone" style="font-size:13px;font-weight:600;">{{t.form.phone}} <span aria-hidden="true" style="color:#A9512F;">*</span></label>
+<input class="ms-in" id="ms-phone" name="phone" type="tel" required="required" :value="form.phone" @input="onField" :placeholder="t.form.phonePh" style="width:100%;height:52px;padding-inline:16px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-type" style="font-size:13px;font-weight:600;">{{t.form.type}} <span aria-hidden="true" style="color:#A9512F;">*</span></label>
+<div style="position:relative;">
+<select class="ms-in" id="ms-type" name="type" required="required" :value="form.type" @change="onField" style="width:100%;height:52px;padding-inline-start:16px;padding-inline-end:44px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;appearance:none;cursor:pointer;">
+<option value="">{{t.form.choose}}</option>
+<option value="mariage">{{t.form.types.mariage}}</option>
+<option value="fiancailles">{{t.form.types.fiancailles}}</option>
+<option value="entreprise">{{t.form.types.entreprise}}</option>
+<option value="anniversaire">{{t.form.types.anniversaire}}</option>
+<option value="privee">{{t.form.types.privee}}</option>
+<option value="autre">{{t.form.types.autre}}</option>
+</select>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E4226" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:17px;inset-inline-end:16px;pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-date" style="font-size:13px;font-weight:600;">{{t.form.date}}</label>
+<input class="ms-in" id="ms-date" name="date" type="date" :value="form.date" @input="onField" style="width:100%;height:52px;padding-inline:16px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-guests" style="font-size:13px;font-weight:600;">{{t.form.guests}}</label>
+<div style="position:relative;">
+<select class="ms-in" id="ms-guests" name="guests" :value="form.guests" @change="onField" style="width:100%;height:52px;padding-inline-start:16px;padding-inline-end:44px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;appearance:none;cursor:pointer;">
+<option value="">{{t.form.choose}}</option>
+<option value="g1">{{t.form.guestsOpts.g1}}</option>
+<option value="g2">{{t.form.guestsOpts.g2}}</option>
+<option value="g3">{{t.form.guestsOpts.g3}}</option>
+<option value="g4">{{t.form.guestsOpts.g4}}</option>
+<option value="g5">{{t.form.guestsOpts.g5}}</option>
+</select>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E4226" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:17px;inset-inline-end:16px;pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-budget" style="font-size:13px;font-weight:600;">{{t.form.budget}}</label>
+<div style="position:relative;">
+<select class="ms-in" id="ms-budget" name="budget" :value="form.budget" @change="onField" style="width:100%;height:52px;padding-inline-start:16px;padding-inline-end:44px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;color:#26231F;appearance:none;cursor:pointer;">
+<option value="">{{t.form.choose}}</option>
+<option value="b1">{{t.form.budgets.b1}}</option>
+<option value="b2">{{t.form.budgets.b2}}</option>
+<option value="b3">{{t.form.budgets.b3}}</option>
+<option value="b4">{{t.form.budgets.b4}}</option>
+<option value="b5">{{t.form.budgets.b5}}</option>
+</select>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E4226" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:17px;inset-inline-end:16px;pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div class="ms-span2" style="display:flex;flex-direction:column;gap:8px;">
+<label for="ms-msg" style="font-size:13px;font-weight:600;">{{t.form.msg}}</label>
+<textarea class="ms-in" id="ms-msg" name="msg" rows="4" :value="form.msg" @input="onField" :placeholder="t.form.msgPh" style="width:100%;min-height:120px;padding:14px 16px;border:1px solid #D9CAB0;border-radius:12px;background:#FBF7F0;font:inherit;font-size:16px;line-height:1.5;color:#26231F;resize:vertical;"></textarea>
+</div>
+<div class="ms-span2" style="display:flex;flex-direction:column;gap:12px;margin-top:6px;">
+<template v-if="err"><p role="alert" style="margin:0;font-size:14px;color:#8E4226;">{{t.form.error}}</p></template>
+<button class="ms-btn ms-arrowlink" type="submit" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:58px;border:0;border-radius:999px;background:#A9512F;color:#FBF7F0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;">{{t.form.submit}}<svg class="ms-arrow ms-flip" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<p style="margin:0;text-align:center;font-size:13px;line-height:1.5;color:#6B6358;">{{t.form.consent}}</p>
+</div>
+<div class="ms-span2" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 10px;padding-top:14px;border-top:1px solid #EFE6D6;font-size:14px;color:#5B544B;">
+<span>{{t.form.or}}</span>
+<a :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;color:#14783F;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.form.orLink}}</a>
+</div>
+</form>
+</template>
+<template v-if="sent">
+<div role="status" style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;">
+<span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:999px;background:#F4EDE1;color:#A27C42;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.2 4.2L19 7"></path></svg></span>
+<h3 class="ms-h ms-serif" style="margin:0;font-size:34px;font-weight:500;">{{t.form.okTitle}}</h3>
+<p style="margin:0;font-size:16px;color:#5B544B;">{{t.form.okText}}</p>
+<div style="width:100%;margin-top:4px;border-top:1px solid #EAE0CE;">
+<template v-for="r in recap">
+<div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #EAE0CE;font-size:15px;"><span style="color:#6B6358;">{{r.k}}</span><span style="font-weight:600;text-align:end;">{{r.v}}</span></div>
+</template>
+</div>
+<a class="ms-btn" :href="waQuote" target="_blank" rel="noopener" style="margin-top:8px;display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px;border-radius:999px;background:#168F4C;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.form.okWa}}</a>
+<button type="button" @click="resetForm" style="min-height:44px;padding:0;border:0;background:transparent;font:inherit;font-size:15px;font-weight:600;color:#8E4226;text-decoration:underline;text-underline-offset:4px;cursor:pointer;">{{t.form.again}}</button>
+</div>
+</template>
+</div>
+</div>
+</section>
+
+<footer id="contact" style="position:relative;overflow:hidden;background:#1F1C19;color:#F3ECE0;">
+<svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;opacity:.1;mask-image:radial-gradient(50% 70% at 0% 100%, #000 0%, transparent 70%);"><defs><pattern id="msp-foot" width="64" height="64" patternUnits="userSpaceOnUse"><g fill="none" stroke="#D1AE74" stroke-width="1"><path d="M20 20h24v24H20z"></path><path d="M32 15 49 32 32 49 15 32z"></path><path d="M32 0v15M32 49v15M0 32h15M49 32h15"></path><path d="M0-8 8 0 0 8-8 0zM64-8l8 8-8 8-8-8zM0 56l8 8-8 8-8-8zM64 56l8 8-8 8-8-8z"></path></g></pattern></defs><rect width="100%" height="100%" fill="url(#msp-foot)"></rect></svg>
+<div class="ms-wrap" style="position:relative;padding-top:88px;padding-bottom:32px;">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 48px;padding-bottom:52px;border-bottom:1px solid rgba(243,236,224,.14);">
+<p class="ms-h ms-serif" style="margin:0;max-width:640px;font-size:clamp(30px,3.8cqi,50px);font-weight:500;">{{t.footer.claim}}</p>
+<div class="ms-hero-ctas" style="display:flex;flex-wrap:wrap;gap:12px;">
+<a class="ms-btn" href="#devis" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;background:#A9512F;color:#FBF7F0;font-size:15px;font-weight:600;text-decoration:none;">{{t.cta}}</a>
+<a class="ms-btn" :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid rgba(243,236,224,.4);color:#F3ECE0;font-size:15px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>WhatsApp</a>
+</div>
+</div>
+<div class="ms-foot" style="padding-top:52px;">
+<div style="display:flex;flex-direction:column;gap:18px;">
+<span style="display:flex;align-items:center;gap:12px;">
+<svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#D1AE74" stroke-width="1.2" aria-hidden="true"><path d="M9 9h16v16H9z"></path><path d="M17 5.7 28.3 17 17 28.3 5.7 17z"></path><circle cx="17" cy="17" r="3"></circle></svg>
+<span class="ms-serif" style="font-size:26px;font-weight:600;">{{brand}}</span>
+</span>
+<p style="margin:0;max-width:340px;font-size:15px;line-height:1.7;color:#BDB3A3;">{{t.footer.about}}</p>
+<div>
+<p class="ms-eyebrow" style="margin:6px 0 12px;font-size:11px;color:#D1AE74;">{{t.footer.follow}}</p>
+<div style="display:flex;gap:10px;">
+<a :href="instaUrl" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;border:1px solid rgba(243,236,224,.25);color:#F3ECE0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"></circle></svg></a>
+<a :href="fbUrl" target="_blank" rel="noopener" aria-label="Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;border:1px solid rgba(243,236,224,.25);color:#F3ECE0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 21v-7.5h2.6l.4-3.2h-3V8.4c0-.9.3-1.6 1.6-1.6h1.6V4a21 21 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.3H8.7v3.2h2.6V21"></path></svg></a>
+<a :href="ttUrl" target="_blank" rel="noopener" aria-label="TikTok" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;border:1px solid rgba(243,236,224,.25);color:#F3ECE0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.5 2.6 2.3 4.3 5 4.6"></path></svg></a>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px;">
+<div>
+<p class="ms-eyebrow" style="margin:0 0 12px;font-size:11px;color:#D1AE74;">{{t.footer.address}}</p>
+<address style="font-style:normal;font-size:15px;line-height:1.7;color:#E6DDCF;">{{address}}<br>{{city}}, {{t.footer.country}}</address>
+</div>
+<div>
+<p class="ms-eyebrow" style="margin:0 0 12px;font-size:11px;color:#D1AE74;">{{t.footer.hours}}</p>
+<ul style="margin:0;padding:0;list-style:none;font-size:15px;line-height:1.8;color:#E6DDCF;">
+<template v-for="h in t.footer.hoursList"><li>{{h}}</li></template>
+</ul>
+</div>
+</div>
+<div>
+<p class="ms-eyebrow" style="margin:0 0 8px;font-size:11px;color:#D1AE74;">{{t.footer.contact}}</p>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;">
+<li><a :href="telHref" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;color:#F3ECE0;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1AE74" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg><span dir="ltr">{{phone}}</span></a></li>
+<li><a :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;color:#F3ECE0;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="#D1AE74" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="#D1AE74"></path></svg>WhatsApp</a></li>
+<li><a :href="mailHref" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;color:#F3ECE0;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1AE74" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span dir="ltr">{{email}}</span></a></li>
+</ul>
+</div>
+<a :href="mapUrl" target="_blank" rel="noopener" style="position:relative;display:block;min-height:220px;border-radius:16px;overflow:hidden;border:1px solid rgba(243,236,224,.14);background:#2A2521;color:#F3ECE0;text-decoration:none;">
+<svg aria-hidden="true" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="400" height="240" fill="#2A2521"></rect><path d="M250 26h78v56h-78z" fill="rgba(135,144,106,.3)"></path><path d="M30 150h60v60H30z" fill="rgba(135,144,106,.22)"></path><g fill="none" stroke="rgba(243,236,224,.12)" stroke-width="2"><path d="M40 0v240M120 0 104 240M212 0l18 240M300 0l-12 240M362 0v240M0 58h400M0 118l400-18M0 196l400 10"></path></g><path d="M-10 172C80 150 140 194 230 160s130-42 180-22" fill="none" stroke="rgba(243,236,224,.2)" stroke-width="9"></path><circle cx="200" cy="112" r="46" fill="rgba(169,81,47,.2)"></circle></svg>
+<svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" style="position:absolute;top:calc(50% - 46px);left:50%;transform:translateX(-50%);"><path d="M12 22s-7.5-6.6-7.5-12.2A7.5 7.5 0 0 1 19.5 9.8C19.5 15.4 12 22 12 22z" fill="#A9512F"></path><circle cx="12" cy="9.8" r="2.8" fill="#FBF7F0"></circle></svg>
+<span style="position:absolute;bottom:12px;inset-inline-start:12px;inset-inline-end:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(20,17,14,.6);font-size:13px;"><span>{{t.footer.map}}</span><span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#E8C995;">{{t.footer.mapLink}}<svg class="ms-flip" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+</a>
+</div>
+<div style="margin-top:52px;padding-top:22px;border-top:1px solid rgba(243,236,224,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:13px;color:#A99F8F;">
+<span>{{t.footer.rights}} · <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:#A99F8F;">{{t.footer.photos}}</a></span>
+<span style="display:flex;gap:20px;"><a href="#accueil" style="color:#A99F8F;">{{t.footer.legal}}</a><a href="#accueil" style="color:#A99F8F;">{{t.footer.privacy}}</a></span>
+</div>
+</div>
+</footer>
+
+</div>
+<a class="ms-wa" :href="waHello" target="_blank" rel="noopener" :aria-label="t.waFloat" style="position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:999px;background:#168F4C;color:#FFFFFF;box-shadow:0 14px 30px -10px rgba(0,0,0,.45);text-decoration:none;"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg></a>
+</div>
+</body>
+</html>

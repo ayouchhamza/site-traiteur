@@ -1,0 +1,106 @@
+[v-cloak]{visibility:hidden}
+body{margin:0;background:#FBF7F0}
+html{scroll-behavior:smooth}
+a{color:inherit}
+a:hover{color:inherit}
+.ms-root *,.ms-root *::before,.ms-root *::after{box-sizing:border-box}
+.ms-root ::selection{background:#E8C995;color:#26231F}
+.ms-serif{font-family:'Cormorant Garamond','Amiri',Georgia,serif}
+.ms-wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:40px}
+.ms-sec{padding-block:96px}
+.ms-sechead{margin-bottom:56px}
+.ms-eyebrow{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.4}
+.ms-h{line-height:1.08;letter-spacing:-.005em}
+.ms-em{font-style:italic}
+[dir=rtl] .ms-eyebrow{letter-spacing:0;font-size:14px}
+[dir=rtl] .ms-h{line-height:1.45;letter-spacing:0}
+[dir=rtl] .ms-em{font-style:normal}
+[dir=rtl] .ms-flip{transform:scaleX(-1)}
+.ms-head{margin-bottom:-76px;background:rgba(251,247,240,.97);color:#26231F;box-shadow:0 1px 0 rgba(38,35,31,.08)}
+.ms-headbar{height:76px}
+.ms-navlinks{display:flex}
+.ms-burger{display:none}
+.ms-head-cta{display:inline-flex}
+.ms-navlink{position:relative;padding-block:10px}
+.ms-navlink::after{content:'';position:absolute;inset-inline:0;bottom:4px;height:1px;background:currentColor;transform:scaleX(0);transition:transform .3s ease}
+.ms-navlink:hover::after{transform:scaleX(1)}
+.ms-btn{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+.ms-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -14px rgba(38,35,31,.55)}
+.ms-root a:focus-visible,.ms-root button:focus-visible{outline:2px solid #C9733F;outline-offset:3px}
+.ms-in:focus{outline:2px solid #A9512F;outline-offset:1px;border-color:#A9512F}
+.ms-arrow{transition:transform .25s ease}
+.ms-arrowlink:hover .ms-arrow{transform:translateX(4px)}
+[dir=rtl] .ms-arrowlink:hover .ms-arrow{transform:scaleX(-1) translateX(4px)}
+.ms-ph{transition:transform .6s ease}
+.ms-card:hover .ms-ph{transform:scale(1.02)}
+.ms-hero-in{padding-top:150px;padding-bottom:150px}
+.ms-hero-shade{background:linear-gradient(90deg,rgba(24,18,14,.6) 0%,rgba(24,18,14,.3) 55%,rgba(24,18,14,.05) 100%)}
+[dir=rtl] .ms-hero-shade{background:linear-gradient(270deg,rgba(24,18,14,.6) 0%,rgba(24,18,14,.3) 55%,rgba(24,18,14,.05) 100%)}
+.ms-hero-in p{text-shadow:0 1px 14px rgba(0,0,0,.35)}
+.ms-stat{padding:30px 30px 28px}
+.ms-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ms-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.ms-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.ms-plan-feat{transform:translateY(-16px)}
+.ms-gal{columns:4;column-gap:18px}
+.ms-gal figure{break-inside:avoid;margin:0 0 18px}
+.ms-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.ms-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:80px}
+.ms-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+.ms-span2{grid-column:1/-1}
+.ms-foot{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.35fr);gap:48px}
+.ms-quote-card{padding:52px 56px 36px}
+.ms-quote-text{min-height:8.3em}
+.ms-form-card{padding:44px}
+#devis-form{scroll-margin-top:90px}
+.ms-wa::after{content:'';position:absolute;inset:0;border-radius:inherit;animation:ms-pulse 2.8s ease-out infinite}
+@keyframes ms-pulse{0%{box-shadow:0 0 0 0 rgba(22,143,76,.45)}70%{box-shadow:0 0 0 16px rgba(22,143,76,0)}100%{box-shadow:0 0 0 0 rgba(22,143,76,0)}}
+@keyframes ms-rise{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes ms-par{to{transform:translateY(14%)}}
+@keyframes ms-headk{from{background-color:rgba(251,247,240,0);color:#FBF7F0;box-shadow:0 1px 0 rgba(251,247,240,.14)}to{background-color:rgba(251,247,240,.97);color:#26231F;box-shadow:0 1px 0 rgba(38,35,31,.08)}}
+@supports (animation-timeline: view()){
+.ms-rv{animation:ms-rise linear both;animation-timeline:view();animation-range:entry 5% entry 70%}
+.ms-par{animation:ms-par linear both;animation-timeline:scroll();animation-range:0 900px}
+.ms-head{animation:ms-headk linear both;animation-timeline:scroll();animation-range:0 180px}
+}
+.ms-head.ms-head-open{animation:none;background:#FBF7F0;color:#26231F}
+@media (prefers-reduced-motion: reduce){.ms-rv,.ms-par{animation:none}.ms-wa::after{animation:none}.ms-btn:hover{transform:none}html{scroll-behavior:auto}}
+@container ms (max-width: 1060px){
+.ms-navlinks{display:none}
+.ms-burger{display:inline-flex}
+.ms-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ms-gal{columns:3}
+.ms-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 32px}
+.ms-split{gap:48px}
+.ms-plans{gap:16px}
+.ms-plan-feat{transform:none}
+.ms-foot{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container ms (max-width: 760px){
+.ms-wrap{padding-inline:20px}
+.ms-sec{padding-block:64px}
+.ms-sechead{margin-bottom:36px}
+.ms-head{margin-bottom:-64px}
+.ms-headbar{height:64px}
+.ms-head-cta{display:none}
+.ms-hide-m{display:none !important}
+.ms-brand{font-size:21px !important;white-space:nowrap}
+.ms-hero-in{padding-top:112px;padding-bottom:112px}
+.ms-hero-ctas>a{flex:1 1 100%}
+.ms-hero-shade,[dir=rtl] .ms-hero-shade{background:rgba(24,18,14,.5)}
+.ms-stat{padding:22px 18px 20px}
+.ms-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ms-cards{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;margin-inline:-20px;padding-inline:20px;padding-bottom:6px;scrollbar-width:none}
+.ms-cards>*{scroll-snap-align:start}
+.ms-plans{grid-template-columns:minmax(0,1fr)}
+.ms-gal{columns:2;column-gap:10px}
+.ms-gal figure{margin-bottom:10px}
+.ms-gal figcaption{bottom:6px !important;inset-inline-start:6px !important;max-width:calc(100% - 12px) !important;padding:4px 8px !important;font-size:10.5px !important}
+.ms-steps{grid-template-columns:minmax(0,1fr);gap:36px}
+.ms-split{grid-template-columns:minmax(0,1fr);gap:40px}
+.ms-form-grid{grid-template-columns:minmax(0,1fr)}
+.ms-foot{grid-template-columns:minmax(0,1fr);gap:36px}
+.ms-quote-card{padding:36px 22px 22px}
+.ms-quote-text{min-height:11em}
+.ms-form-card{padding:28px 20px}
+}
