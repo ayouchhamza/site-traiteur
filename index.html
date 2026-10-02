@@ -22,6 +22,7 @@
 <link rel="preload" as="image" href="images/hero-table-m.jpg" media="(max-width: 760px)">
 <link rel="preload" as="image" href="images/hero-table.jpg" media="(min-width: 761px)">
 <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer></script>
+<script src="js/config.js" defer></script>
 <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -614,12 +615,9 @@
 </div>
 <div class="ms-span2" style="display:flex;flex-direction:column;gap:12px;margin-top:6px;">
 <template v-if="err"><p role="alert" style="margin:0;font-size:14px;color:#8E4226;">{{t.form.error}}</p></template>
-<button class="ms-btn ms-arrowlink" type="submit" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:58px;border:0;border-radius:999px;background:#A9512F;color:#FBF7F0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;">{{t.form.submit}}<svg class="ms-arrow ms-flip" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<template v-if="sendErr"><p role="alert" style="margin:0;font-size:14px;color:#8E4226;">{{t.form.sendError}}</p></template>
+<button class="ms-btn ms-arrowlink" type="submit" :disabled="sending" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:58px;border:0;border-radius:999px;background:#A9512F;color:#FBF7F0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;">{{submitLabel}}<svg class="ms-arrow ms-flip" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
 <p style="margin:0;text-align:center;font-size:13px;line-height:1.5;color:#6B6358;">{{t.form.consent}}</p>
-</div>
-<div class="ms-span2" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 10px;padding-top:14px;border-top:1px solid #EFE6D6;font-size:14px;color:#5B544B;">
-<span>{{t.form.or}}</span>
-<a :href="waHello" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;color:#14783F;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.form.orLink}}</a>
 </div>
 </form>
 </template>
@@ -633,7 +631,6 @@
 <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #EAE0CE;font-size:15px;"><span style="color:#6B6358;">{{r.k}}</span><span style="font-weight:600;text-align:end;">{{r.v}}</span></div>
 </template>
 </div>
-<a class="ms-btn" :href="waQuote" target="_blank" rel="noopener" style="margin-top:8px;display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px;border-radius:999px;background:#168F4C;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.75 7.36L3.5 20.5l1.14-4.65A8.5 8.5 0 1 1 20.5 11.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9.2 7.6c.3-.3.8-.3 1 .1l.9 1.6c.2.3.1.7-.1.9l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.2.6-.3.9-.1l1.6.9c.4.2.4.7.1 1l-.8.8c-.6.6-1.5.7-2.2.4a8.3 8.3 0 0 1-4.6-4.6c-.3-.7-.2-1.6.4-2.2l.8-.8z" fill="currentColor"></path></svg>{{t.form.okWa}}</a>
 <button type="button" @click="resetForm" style="min-height:44px;padding:0;border:0;background:transparent;font:inherit;font-size:15px;font-weight:600;color:#8E4226;text-decoration:underline;text-underline-offset:4px;cursor:pointer;">{{t.form.again}}</button>
 </div>
 </template>

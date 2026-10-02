@@ -12,7 +12,24 @@ class DCLogic {
 class Component extends DCLogic {
   constructor(...args) {
     super(...args);
-    this.state = { lang: null, menu: false, gal: 'all', galMore: false, slide: 0, faq: 0, sent: false, err: false, form: this.blankForm() };
+    this.state = { lang: null, menu: false, gal: 'all', galMore: false, slide: 0, faq: 0, sent: false, err: false, sending: false, sendErr: false, form: this.blankForm() };
+    this.bornAt = Date.now();
+  }
+
+  // Demande de devis telle qu’elle est enregistrée (libellés en français pour l’espace admin).
+  // Sur le site publié, sendQuote(payload) l’envoie à la base de données ; la maquette n’en a pas.
+  quotePayload(f, lang) {
+    const fr = this.copyFr(this.facts()).form;
+    return {
+      nom: f.name.trim(),
+      telephone: f.phone.trim(),
+      type_evenement: fr.types[f.type] || f.type,
+      date_evenement: f.date || null,
+      invites: fr.guestsOpts[f.guests] || null,
+      budget: fr.budgets[f.budget] || null,
+      message: f.msg.trim() || null,
+      langue: lang
+    };
   }
 
   blankForm() {
@@ -149,16 +166,14 @@ class Component extends DCLogic {
         guestsOpts: { g1: 'Moins de 50', g2: '50 à 100', g3: '100 à 200', g4: '200 à 400', g5: 'Plus de 400' },
         budgets: { b1: 'Moins de 30 000 DH', b2: '30 000 à 60 000 DH', b3: '60 000 à 120 000 DH', b4: 'Plus de 120 000 DH', b5: 'Je ne sais pas encore' },
         submit: 'Envoyer ma demande',
-        consent: 'En envoyant ce formulaire, vous acceptez d’être recontacté(e) par téléphone ou WhatsApp.',
+        consent: 'En envoyant ce formulaire, vous acceptez que vos informations soient utilisées pour vous recontacter au sujet de votre événement.',
         error: 'Merci d’indiquer votre nom, votre téléphone et le type d’événement.',
-        or: 'Vous préférez aller plus vite' + n + '?',
-        orLink: 'Écrire sur WhatsApp',
+        sending: 'Envoi en cours…',
+        sendError: 'L’envoi n’a pas abouti. Vérifiez votre connexion et réessayez, ou appelez-nous au ' + F.phone + '.',
         okTitle: 'Merci, votre demande est bien partie.',
-        okText: 'Nous revenons vers vous très vite pour en parler. Pour gagner du temps, vous pouvez aussi nous envoyer ce récapitulatif sur WhatsApp.',
-        okWa: 'Envoyer le récapitulatif sur WhatsApp',
+        okText: 'Nous vous rappelons très vite pour en parler. Voici le récapitulatif de votre demande' + n + ':',
         again: 'Faire une nouvelle demande',
-        about: 'Prestation souhaitée' + n + ':',
-        waIntro: 'Bonjour ' + F.brand + ', je souhaite recevoir un devis.'
+        about: 'Prestation souhaitée' + n + ':'
       },
       footer: {
         claim: 'Recevoir est un art. Nous en avons fait notre métier.',
@@ -285,16 +300,14 @@ class Component extends DCLogic {
         guestsOpts: { g1: 'أقل من 50', g2: 'من 50 إلى 100', g3: 'من 100 إلى 200', g4: 'من 200 إلى 400', g5: 'أكثر من 400' },
         budgets: { b1: 'أقل من 30 000 درهم', b2: 'من 30 000 إلى 60 000 درهم', b3: 'من 60 000 إلى 120 000 درهم', b4: 'أكثر من 120 000 درهم', b5: 'لم أحدّد بعد' },
         submit: 'أرسل طلبي',
-        consent: 'بإرسال هذا النموذج، توافقون على أن نتواصل معكم عبر الهاتف أو واتساب.',
+        consent: 'بإرسال هذا النموذج، توافقون على استعمال معلوماتكم للتواصل معكم بخصوص مناسبتكم.',
         error: 'المرجو إدخال الاسم ورقم الهاتف ونوع المناسبة.',
-        or: 'تفضّلون السرعة؟',
-        orLink: 'راسلونا على واتساب',
+        sending: 'جارٍ الإرسال…',
+        sendError: 'تعذّر إرسال الطلب. تحقّقوا من الاتصال وأعيدوا المحاولة، أو اتصلوا بنا على ' + F.phone + '.',
         okTitle: 'شكراً، لقد توصّلنا بطلبكم.',
-        okText: 'سنعود إليكم قريباً جداً للحديث عنه. ولربح الوقت، يمكنكم أيضاً إرسال هذا الملخّص عبر واتساب.',
-        okWa: 'إرسال الملخّص عبر واتساب',
+        okText: 'سنتصل بكم قريباً جداً للحديث عنه. إليكم ملخّص طلبكم:',
         again: 'تقديم طلب جديد',
-        about: 'الخدمة المطلوبة:',
-        waIntro: 'السلام عليكم ' + F.brand + '، أرغب في الحصول على عرض سعر.'
+        about: 'الخدمة المطلوبة:'
       },
       footer: {
         claim: 'الضيافة فنّ، وقد جعلنا منه مهنتنا.',
@@ -423,13 +436,6 @@ class Component extends DCLogic {
       { k: t.form.guests, v: pickLabel(t.form.guestsOpts, form.guests) },
       { k: t.form.budget, v: pickLabel(t.form.budgets, form.budget) }
     ].filter((r) => r.v);
-    const waLines = [t.form.waIntro, '']
-      .concat([
-        { k: t.form.name, v: form.name },
-        { k: t.form.phone, v: form.phone }
-      ].concat(recap).concat([{ k: t.form.msg, v: form.msg }])
-        .filter((r) => r.v)
-        .map((r) => '• ' + r.k + t.sep + r.v));
 
     return {
       t: t,
@@ -444,7 +450,6 @@ class Component extends DCLogic {
       telHref: 'tel:+' + F.wa,
       mailHref: 'mailto:' + F.email,
       waHello: wa(t.waHello),
-      waQuote: wa(waLines.join('\n')),
       instaUrl: 'https://www.instagram.com/' + F.handle + '/',
       fbUrl: 'https://www.facebook.com/' + F.handle,
       ttUrl: 'https://www.tiktok.com/@' + F.handle,
@@ -485,24 +490,54 @@ class Component extends DCLogic {
       sent: st.sent,
       notSent: !st.sent,
       err: st.err,
+      sending: st.sending,
+      sendErr: st.sendErr,
+      submitLabel: st.sending ? t.form.sending : t.form.submit,
       onField: (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        this.setState((s) => ({ err: false, form: Object.assign({}, s.form, { [name]: value }) }));
+        this.setState((s) => ({ err: false, sendErr: false, form: Object.assign({}, s.form, { [name]: value }) }));
       },
       submit: (e) => {
         if (e && e.preventDefault) e.preventDefault();
         const f = this.state.form;
+        if (this.state.sending) return;
         if (!f.name.trim() || !f.phone.trim() || !f.type) {
           this.setState({ err: true });
           return;
         }
-        this.setState({ sent: true, err: false });
+        // Envoyé moins de 3 s après l’ouverture de la page : c’est un robot, on n’enregistre rien.
+        if (Date.now() - this.bornAt < 3000 || typeof this.sendQuote !== 'function') {
+          this.setState({ sent: true, err: false });
+          return;
+        }
+        this.setState({ sending: true, sendErr: false, err: false });
+        this.sendQuote(this.quotePayload(f, lang)).then(
+          () => this.setState({ sending: false, sent: true }),
+          () => this.setState({ sending: false, sendErr: true })
+        );
       },
-      resetForm: () => this.setState({ sent: false, err: false, form: this.blankForm() })
+      resetForm: () => this.setState({ sent: false, err: false, sendErr: false, form: this.blankForm() })
     };
   }
 }
+
+// Enregistre une demande de devis dans Supabase (connexion : js/config.js, règles d’accès : supabase/schema.sql).
+Component.prototype.sendQuote = function (payload) {
+  const cfg = window.TR_CONFIG || {};
+  const base = (cfg.supabaseUrl || '').replace(/\/$/, '');
+  const key = cfg.supabaseAnonKey || '';
+  if (!base || !key || /VOTRE/.test(base + key)) {
+    return Promise.reject(new Error('Supabase n’est pas configuré dans js/config.js'));
+  }
+  return fetch(base + '/rest/v1/devis', {
+    method: 'POST',
+    headers: { apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    body: JSON.stringify(payload)
+  }).then((res) => {
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+  });
+};
 
 (function () {
   const comp = new Component({ startLang: 'fr' });

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace admin — Traiteur Radi</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap">
+<link rel="stylesheet" href="admin.css">
+<script src="../js/config.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer></script>
+<script src="admin.js" defer></script>
+</head>
+<body>
+<div id="admin" v-cloak @vue:mounted="init">
+
+  <main v-if="!configured" class="center">
+    <section class="card login">
+      <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo" width="720" height="210">
+      <h1>Espace admin</h1>
+      <p class="muted">La base de données n’est pas encore connectée : renseignez l’adresse et la clé Supabase dans <code>js/config.js</code> (voir le README).</p>
+      <a href="../" class="back">← Retour au site</a>
+    </section>
+  </main>
+
+  <main v-else-if="!session" class="center">
+    <form class="card login" @submit.prevent="doLogin">
+      <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo" width="720" height="210">
+      <h1>Espace admin</h1>
+      <p class="muted">Connectez-vous pour consulter les demandes de devis.</p>
+      <label for="login-user">Identifiant</label>
+      <input id="login-user" v-model.trim="login.user" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      <label for="login-pass">Mot de passe</label>
+      <input id="login-pass" type="password" v-model="login.pass" autocomplete="current-password" required>
+      <p v-if="loginErr" class="error" role="alert">{{ loginErr }}</p>
+      <button class="btn primary" type="submit" :disabled="loggingIn">{{ loggingIn ? 'Connexion…' : 'Se connecter' }}</button>
+      <a href="../" class="back">← Retour au site</a>
+    </form>
+  </main>
+
+  <template v-else>
+    <header class="top">
+      <div class="wrap top-in">
+        <a href="../" aria-label="Voir le site"><img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo-sm" width="720" height="210"></a>
+        <div class="top-actions">
+          <span class="who">{{ session.email }}</span>
+          <button class="btn ghost" type="button" @click="logout">Se déconnecter</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap dash">
+      <div class="head">
+        <div>
+          <h1>Demandes de devis</h1>
+          <p class="muted">{{ rows.length }} demande{{ rows.length > 1 ? 's' : '' }} au total<span v-if="updatedAt"> · mise à jour à {{ updatedLabel }}</span></p>
+        </div>
+        <div class="head-actions">
+          <button class="btn ghost" type="button" @click="load()" :disabled="loading">{{ loading ? 'Chargement…' : 'Actualiser' }}</button>
+          <button class="btn ghost" type="button" @click="exportCsv" :disabled="!rows.length">Exporter (CSV)</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat st-nouveau"><span class="stat-n">{{ counts.nouveau }}</span><span class="stat-l">Nouvelles</span></div>
+        <div class="stat st-en_cours"><span class="stat-n">{{ counts.en_cours }}</span><span class="stat-l">En cours</span></div>
+        <div class="stat st-traite"><span class="stat-n">{{ counts.traite }}</span><span class="stat-l">Traitées</span></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="tabs" role="group" aria-label="Filtrer par statut">
+          <button v-for="f in filters" :key="f.id" type="button" class="tab" :class="{ on: filter === f.id }" :aria-pressed="filter === f.id ? 'true' : 'false'" @click="filter = f.id">{{ f.label }} <span class="tab-n">{{ f.id === 'tous' ? rows.length : counts[f.id] }}</span></button>
+        </div>
+        <input class="search" type="search" v-model="search" placeholder="Rechercher un nom, un téléphone, un message…" aria-label="Rechercher une demande">
+      </div>
+
+      <p v-if="loadErr" class="error" role="alert">{{ loadErr }}</p>
+      <p v-if="!loading && !loadErr && !filtered.length" class="empty">{{ rows.length ? 'Aucune demande ne correspond à ce filtre.' : 'Aucune demande de devis pour le moment.' }}</p>
+
+      <div class="list">
+        <article v-for="r in filtered" :key="r.id" class="card req" :class="'st-' + r.statut">
+          <div class="req-head">
+            <div>
+              <h2>{{ r.nom }}</h2>
+              <a class="tel" :href="telHref(r.telephone)">{{ r.telephone }}</a>
+            </div>
+            <span class="badge">{{ statusLabel(r.statut) }}</span>
+          </div>
+          <dl class="facts">
+            <div><dt>Événement</dt><dd>{{ r.type_evenement }}</dd></div>
+            <div><dt>Date</dt><dd>{{ fmtDay(r.date_evenement) }}</dd></div>
+            <div><dt>Invités</dt><dd>{{ r.invites || '—' }}</dd></div>
+            <div><dt>Budget</dt><dd>{{ r.budget || '—' }}</dd></div>
+          </dl>
+          <p v-if="r.message" class="msg">{{ r.message }}</p>
+          <div class="req-foot">
+            <span class="muted">Reçue le {{ fmtDateTime(r.created_at) }} · formulaire en {{ r.langue === 'ar' ? 'arabe' : 'français' }}</span>
+            <div class="req-actions">
+              <label class="sr-only" :for="'statut-' + r.id">Statut de la demande</label>
+              <select :id="'statut-' + r.id" :value="r.statut" @change="setStatus(r, $event.target.value)">
+                <option value="nouveau">Nouveau</option>
+                <option value="en_cours">En cours</option>
+                <option value="traite">Traité</option>
+              </select>
+              <button class="btn danger" type="button" @click="remove(r)">Supprimer</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </template>
+
+</div>
+</body>
+</html>
