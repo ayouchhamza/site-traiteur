@@ -47,7 +47,6 @@ class Component extends DCLogic {
     const n = ' ';
     return {
       sep: n + ': ',
-      tagline: 'Réceptions · ' + city,
       langLabel: 'Choisir la langue',
       navAria: 'Navigation principale',
       nav: [
@@ -184,7 +183,6 @@ class Component extends DCLogic {
     const city = F.city.ar;
     return {
       sep: ': ',
-      tagline: 'حفلات ومناسبات · ' + city,
       langLabel: 'اختيار اللغة',
       navAria: 'القائمة الرئيسية',
       nav: [

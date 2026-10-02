@@ -84,7 +84,7 @@ a:hover{color:inherit}
 .ms-headbar{height:64px}
 .ms-head-cta{display:none}
 .ms-hide-m{display:none !important}
-.ms-brand{font-size:16px !important;letter-spacing:.06em !important;white-space:nowrap}
+.ms-logo{height:44px !important}
 .ms-hero-in{padding-top:112px;padding-bottom:112px}
 .ms-hero-ctas>a{flex:1 1 100%}
 .ms-hero-shade,[dir=rtl] .ms-hero-shade{background:rgba(24,18,14,.5)}

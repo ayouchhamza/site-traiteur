@@ -13,7 +13,8 @@
 <meta property="og:description" content="Traiteur Radi, traiteur haut de gamme à Casablanca : mariages, fiançailles, événements d’entreprise et réceptions privées. Cuisine marocaine revisitée, buffets, cocktails dînatoires et pâtisseries.">
 <meta property="og:image" content="https://ayouchhamza.github.io/site-traiteur/images/hero-table.jpg">
 <meta property="og:url" content="https://ayouchhamza.github.io/site-traiteur/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600&amp;display=swap">
@@ -30,11 +31,7 @@
 <header :class="headClass" style="position:sticky;top:0;z-index:40;">
 <div class="ms-wrap ms-headbar" style="display:flex;align-items:center;justify-content:space-between;gap:20px;">
 <a href="#accueil" :aria-label="brand" style="display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none;color:inherit;">
-<svg class="ms-hide-m" width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" style="flex-shrink:0;"><path d="M9 9h16v16H9z"></path><path d="M17 5.7 28.3 17 17 28.3 5.7 17z"></path><circle cx="17" cy="17" r="3"></circle></svg>
-<span style="display:flex;flex-direction:column;gap:5px;line-height:1;">
-<span class="ms-serif ms-brand" style="font-size:23px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;">{{brand}}</span>
-<span class="ms-eyebrow ms-hide-m" style="font-size:10px;opacity:.8;">{{t.tagline}}</span>
-</span>
+<img class="ms-logo" src="images/logo-traiteur-radi.png" alt="" width="720" height="210" style="display:block;height:56px;width:auto;">
 </a>
 <nav class="ms-navlinks" :aria-label="t.navAria" style="align-items:center;gap:30px;">
 <template v-for="n in t.nav">
@@ -656,10 +653,7 @@
 </div>
 <div class="ms-foot" style="padding-top:52px;">
 <div style="display:flex;flex-direction:column;gap:18px;">
-<span style="display:flex;align-items:center;gap:12px;">
-<svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#D1AE74" stroke-width="1.2" aria-hidden="true"><path d="M9 9h16v16H9z"></path><path d="M17 5.7 28.3 17 17 28.3 5.7 17z"></path><circle cx="17" cy="17" r="3"></circle></svg>
-<span class="ms-serif" style="font-size:24px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;">{{brand}}</span>
-</span>
+<img src="images/logo-traiteur-radi.png" :alt="brand" width="720" height="210" style="display:block;height:76px;width:auto;align-self:flex-start;">
 <p style="margin:0;max-width:340px;font-size:15px;line-height:1.7;color:#BDB3A3;">{{t.footer.about}}</p>
 <div>
 <p class="ms-eyebrow" style="margin:6px 0 12px;font-size:11px;color:#D1AE74;">{{t.footer.follow}}</p>
