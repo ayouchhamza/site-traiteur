@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Espace admin — Traiteur Radi</title>
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F1C19">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap">
 <link rel="stylesheet" href="admin.css">
 <script src="../js/config.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer></script>
@@ -17,101 +18,216 @@
 <body>
 <div id="admin" v-cloak @vue:mounted="init">
 
-  <main v-if="!configured" class="center">
-    <section class="card login">
-      <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo" width="720" height="210">
-      <h1>Espace admin</h1>
-      <p class="muted">La base de données n’est pas encore connectée : renseignez l’adresse et la clé Supabase dans <code>js/config.js</code> (voir le README).</p>
-      <a href="../" class="back">← Retour au site</a>
+  <!-- Base non connectée -->
+  <main v-if="!configured" class="auth">
+    <section class="auth-panel">
+      <div class="auth-form">
+        <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="auth-logo" width="720" height="210">
+        <p class="eyebrow">Espace admin</p>
+        <h1>Base non connectée</h1>
+        <p class="muted">Renseignez l’adresse et la clé Supabase dans <code>js/config.js</code> (voir le README).</p>
+        <a href="../" class="back">← Retour au site</a>
+      </div>
     </section>
   </main>
 
-  <main v-else-if="!session" class="center">
-    <form class="card login" @submit.prevent="doLogin">
-      <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo" width="720" height="210">
-      <h1>Espace admin</h1>
-      <p class="muted">Connectez-vous pour consulter les demandes de devis.</p>
-      <label for="login-user">Identifiant</label>
-      <input id="login-user" v-model.trim="login.user" autocomplete="username" autocapitalize="none" spellcheck="false" required>
-      <label for="login-pass">Mot de passe</label>
-      <input id="login-pass" type="password" v-model="login.pass" autocomplete="current-password" required>
-      <p v-if="loginErr" class="error" role="alert">{{ loginErr }}</p>
-      <button class="btn primary" type="submit" :disabled="loggingIn">{{ loggingIn ? 'Connexion…' : 'Se connecter' }}</button>
-      <a href="../" class="back">← Retour au site</a>
-    </form>
+  <!-- Connexion -->
+  <main v-else-if="!session" class="auth">
+    <aside class="auth-visual" aria-hidden="true">
+      <img class="auth-photo" src="../images/radi-32.webp" alt="">
+      <div class="auth-visual-in">
+        <img src="../images/logo-traiteur-radi.png" alt="" class="auth-visual-logo" width="720" height="210">
+        <p class="auth-quote">L’art de recevoir, <em>à la marocaine</em></p>
+        <p class="auth-caption">Espace réservé à l’équipe Traiteur Radi</p>
+      </div>
+    </aside>
+    <section class="auth-panel">
+      <form class="auth-form" @submit.prevent="doLogin">
+        <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="auth-logo auth-logo-m" width="720" height="210">
+        <p class="eyebrow">Espace admin</p>
+        <h1>Bon retour</h1>
+        <p class="muted">Connectez-vous pour retrouver les demandes de devis.</p>
+        <div class="field">
+          <label for="login-user">Identifiant</label>
+          <input id="login-user" v-model.trim="login.user" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin" required>
+        </div>
+        <div class="field">
+          <label for="login-pass">Mot de passe</label>
+          <div class="pass">
+            <input id="login-pass" :type="showPass ? 'text' : 'password'" v-model="login.pass" autocomplete="current-password" required>
+            <button type="button" class="pass-toggle" @click="showPass = !showPass" :aria-label="showPass ? 'Masquer le mot de passe' : 'Afficher le mot de passe'" :aria-pressed="showPass ? 'true' : 'false'">
+              <svg v-if="!showPass" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.5 4.5-1.2M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg>
+            </button>
+          </div>
+        </div>
+        <p v-if="loginErr" class="alert" role="alert">{{ loginErr }}</p>
+        <button class="btn primary block" type="submit" :disabled="loggingIn">{{ loggingIn ? 'Connexion…' : 'Se connecter' }}</button>
+        <a href="../" class="back">← Retour au site</a>
+      </form>
+    </section>
   </main>
 
-  <template v-else>
-    <header class="top">
-      <div class="wrap top-in">
-        <a href="../" aria-label="Voir le site"><img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" class="logo-sm" width="720" height="210"></a>
-        <div class="top-actions">
-          <span class="who">{{ session.email }}</span>
-          <button class="btn ghost" type="button" @click="logout">Se déconnecter</button>
+  <!-- Tableau de bord -->
+  <div v-else class="app">
+    <aside class="side">
+      <a href="../" class="side-logo" aria-label="Voir le site"><img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" width="720" height="210"></a>
+      <nav class="side-nav" aria-label="Filtrer les demandes">
+        <p class="side-label">Demandes de devis</p>
+        <button v-for="f in filters" :key="f.id" type="button" class="side-item" :class="{ on: filter === f.id }" :aria-current="filter === f.id ? 'true' : null" @click="setFilter(f.id)">
+          <span class="dot" :class="'d-' + f.id"></span>
+          <span class="side-item-l">{{ f.label }}</span>
+          <span class="side-n" :class="{ hot: f.id === 'nouveau' && counts.nouveau }">{{ countFor(f.id) }}</span>
+        </button>
+      </nav>
+      <div class="side-foot">
+        <a href="../" target="_blank" rel="noopener" class="side-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+          Voir le site
+        </a>
+        <div class="side-user">
+          <span class="avatar sm av-admin">{{ initials(session.email) }}</span>
+          <span class="side-email">{{ session.email }}</span>
         </div>
+        <button class="btn side-out" type="button" @click="logout">Se déconnecter</button>
       </div>
-    </header>
+    </aside>
 
-    <main class="wrap dash">
-      <div class="head">
+    <main class="main">
+      <div class="mtop">
+        <img src="../images/logo-traiteur-radi.png" alt="Traiteur Radi" width="720" height="210">
+        <button class="btn ghost sm" type="button" @click="logout">Déconnexion</button>
+      </div>
+
+      <header class="bar">
         <div>
           <h1>Demandes de devis</h1>
-          <p class="muted">{{ rows.length }} demande{{ rows.length > 1 ? 's' : '' }} au total<span v-if="updatedAt"> · mise à jour à {{ updatedLabel }}</span></p>
+          <p class="muted">
+            <span v-if="updatedAt">Mise à jour à {{ updatedLabel }} · actualisation automatique</span>
+            <span v-else>Chargement des demandes…</span>
+          </p>
         </div>
-        <div class="head-actions">
-          <button class="btn ghost" type="button" @click="load()" :disabled="loading">{{ loading ? 'Chargement…' : 'Actualiser' }}</button>
-          <button class="btn ghost" type="button" @click="exportCsv" :disabled="!rows.length">Exporter (CSV)</button>
+        <div class="bar-actions">
+          <label class="search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input type="search" v-model="search" placeholder="Nom, téléphone, message…" aria-label="Rechercher une demande">
+          </label>
+          <button class="icon-btn" type="button" @click="load()" :disabled="loading" aria-label="Actualiser">
+            <svg :class="{ spin: loading }" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"></path></svg>
+          </button>
+          <button class="btn ghost export" type="button" @click="exportCsv" :disabled="!filtered.length" aria-label="Exporter en CSV">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>
+            <span class="btn-l">Exporter</span>
+          </button>
         </div>
+      </header>
+
+      <div class="chips" role="group" aria-label="Filtrer par statut">
+        <button v-for="f in filters" :key="f.id" type="button" class="chip" :class="{ on: filter === f.id }" :aria-pressed="filter === f.id ? 'true' : 'false'" @click="setFilter(f.id)">{{ f.label }} <span>{{ countFor(f.id) }}</span></button>
       </div>
 
-      <div class="stats">
-        <div class="stat st-nouveau"><span class="stat-n">{{ counts.nouveau }}</span><span class="stat-l">Nouvelles</span></div>
-        <div class="stat st-en_cours"><span class="stat-n">{{ counts.en_cours }}</span><span class="stat-l">En cours</span></div>
-        <div class="stat st-traite"><span class="stat-n">{{ counts.traite }}</span><span class="stat-l">Traitées</span></div>
-      </div>
+      <section class="kpis" aria-label="Résumé">
+        <div class="kpi k-nouveau"><span class="kpi-l">Nouvelles</span><span class="kpi-n">{{ counts.nouveau }}</span><span class="kpi-s">à rappeler</span></div>
+        <div class="kpi k-en_cours"><span class="kpi-l">En cours</span><span class="kpi-n">{{ counts.en_cours }}</span><span class="kpi-s">en discussion</span></div>
+        <div class="kpi k-traite"><span class="kpi-l">Traitées</span><span class="kpi-n">{{ counts.traite }}</span><span class="kpi-s">clôturées</span></div>
+        <div class="kpi k-week"><span class="kpi-l">Cette semaine</span><span class="kpi-n">{{ weekCount }}</span><span class="kpi-s">reçues sur 7 jours</span></div>
+      </section>
 
-      <div class="toolbar">
-        <div class="tabs" role="group" aria-label="Filtrer par statut">
-          <button v-for="f in filters" :key="f.id" type="button" class="tab" :class="{ on: filter === f.id }" :aria-pressed="filter === f.id ? 'true' : 'false'" @click="filter = f.id">{{ f.label }} <span class="tab-n">{{ f.id === 'tous' ? rows.length : counts[f.id] }}</span></button>
-        </div>
-        <input class="search" type="search" v-model="search" placeholder="Rechercher un nom, un téléphone, un message…" aria-label="Rechercher une demande">
-      </div>
+      <p v-if="loadErr" class="alert" role="alert">{{ loadErr }}</p>
 
-      <p v-if="loadErr" class="error" role="alert">{{ loadErr }}</p>
-      <p v-if="!loading && !loadErr && !filtered.length" class="empty">{{ rows.length ? 'Aucune demande ne correspond à ce filtre.' : 'Aucune demande de devis pour le moment.' }}</p>
-
-      <div class="list">
-        <article v-for="r in filtered" :key="r.id" class="card req" :class="'st-' + r.statut">
-          <div class="req-head">
-            <div>
-              <h2>{{ r.nom }}</h2>
-              <a class="tel" :href="telHref(r.telephone)">{{ r.telephone }}</a>
-            </div>
-            <span class="badge">{{ statusLabel(r.statut) }}</span>
-          </div>
-          <dl class="facts">
-            <div><dt>Événement</dt><dd>{{ r.type_evenement }}</dd></div>
-            <div><dt>Date</dt><dd>{{ fmtDay(r.date_evenement) }}</dd></div>
-            <div><dt>Invités</dt><dd>{{ r.invites || '—' }}</dd></div>
-            <div><dt>Budget</dt><dd>{{ r.budget || '—' }}</dd></div>
-          </dl>
-          <p v-if="r.message" class="msg">{{ r.message }}</p>
-          <div class="req-foot">
-            <span class="muted">Reçue le {{ fmtDateTime(r.created_at) }} · formulaire en {{ r.langue === 'ar' ? 'arabe' : 'français' }}</span>
-            <div class="req-actions">
-              <label class="sr-only" :for="'statut-' + r.id">Statut de la demande</label>
-              <select :id="'statut-' + r.id" :value="r.statut" @change="setStatus(r, $event.target.value)">
-                <option value="nouveau">Nouveau</option>
-                <option value="en_cours">En cours</option>
-                <option value="traite">Traité</option>
+      <section class="board">
+        <div class="list-pane">
+          <div class="list-head">
+            <span>{{ filtered.length }} demande{{ filtered.length > 1 ? 's' : '' }}</span>
+            <label class="sort">Trier par
+              <select v-model="sort">
+                <option value="recu">plus récentes</option>
+                <option value="event">date de l’événement</option>
               </select>
-              <button class="btn danger" type="button" @click="remove(r)">Supprimer</button>
-            </div>
+            </label>
           </div>
-        </article>
-      </div>
+          <div v-if="!loading && !filtered.length" class="empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l8 5 8-5"></path><rect x="3" y="5" width="18" height="14" rx="2"></rect></svg>
+            <p>{{ rows.length ? 'Aucune demande ne correspond à ce filtre.' : 'Aucune demande de devis pour le moment.' }}</p>
+          </div>
+          <ul class="rows">
+            <li v-for="r in filtered" :key="r.id">
+              <button type="button" class="row" :class="{ on: r.id === selectedId, unread: r.statut === 'nouveau' }" :aria-current="r.id === selectedId ? 'true' : null" @click="select(r)">
+                <span class="avatar" :class="'av-' + r.statut">{{ initials(r.nom) }}</span>
+                <span class="row-main">
+                  <span class="row-top"><strong>{{ r.nom }}</strong><span class="row-time">{{ timeAgo(r.created_at) }}</span></span>
+                  <span class="row-sub">{{ r.type_evenement }}<span v-if="r.date_evenement"> · {{ fmtDayShort(r.date_evenement) }}</span></span>
+                </span>
+                <span class="pill" :class="'p-' + r.statut">{{ statusLabel(r.statut) }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="detail-pane" :class="{ open: mobileOpen && selected }">
+          <div v-if="!selected" class="detail-empty">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg>
+            <p>Sélectionnez une demande pour voir le détail.</p>
+          </div>
+          <article v-else class="detail">
+            <button type="button" class="back-btn" @click="mobileOpen = false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg>
+              Toutes les demandes
+            </button>
+            <header class="detail-head">
+              <span class="avatar lg" :class="'av-' + selected.statut">{{ initials(selected.nom) }}</span>
+              <div class="detail-title">
+                <h2>{{ selected.nom }}</h2>
+                <p class="muted">Reçue {{ timeAgo(selected.created_at) }} · {{ fmtDateTime(selected.created_at) }}</p>
+              </div>
+              <span class="pill lg" :class="'p-' + selected.statut">{{ statusLabel(selected.statut) }}</span>
+            </header>
+
+            <div class="quick">
+              <a class="btn primary" :href="telHref(selected.telephone)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+                Appeler
+              </a>
+              <button class="btn ghost" type="button" @click="copyPhone(selected)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a1 1 0 0 1 1-1h10"></path></svg>
+                {{ copied === selected.id ? 'Numéro copié' : 'Copier le numéro' }}
+              </button>
+            </div>
+
+            <dl class="info">
+              <div><dt>Téléphone</dt><dd class="ltr">{{ selected.telephone }}</dd></div>
+              <div><dt>Événement</dt><dd>{{ selected.type_evenement }}</dd></div>
+              <div><dt>Date de l’événement</dt><dd>{{ fmtDay(selected.date_evenement) }}<span v-if="selected.date_evenement" class="until">{{ untilLabel(selected.date_evenement) }}</span></dd></div>
+              <div><dt>Invités</dt><dd>{{ selected.invites || '—' }}</dd></div>
+              <div><dt>Budget</dt><dd>{{ selected.budget || '—' }}</dd></div>
+              <div><dt>Formulaire</dt><dd>{{ selected.langue === 'ar' ? 'en arabe' : 'en français' }}</dd></div>
+            </dl>
+
+            <div class="block">
+              <p class="block-label">Message</p>
+              <p class="msg" :class="{ none: !selected.message }">{{ selected.message || 'Aucun message.' }}</p>
+            </div>
+
+            <div class="block">
+              <p class="block-label" id="statut-label">Statut</p>
+              <div class="seg" role="group" aria-labelledby="statut-label">
+                <button v-for="s in statuses" :key="s.id" type="button" :class="{ on: selected.statut === s.id }" :aria-pressed="selected.statut === s.id ? 'true' : 'false'" @click="setStatus(selected, s.id)">
+                  <span class="dot" :class="'d-' + s.id"></span>{{ s.label }}
+                </button>
+              </div>
+            </div>
+
+            <div class="danger-zone">
+              <button class="btn danger" type="button" @click="remove(selected)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-12M9 7V4h6v3"></path></svg>
+                Supprimer la demande
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
-  </template>
+  </div>
 
 </div>
 </body>
