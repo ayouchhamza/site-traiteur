@@ -112,6 +112,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border: 0; border-radius: 10px; background: transparent; color: var(--ink-2); cursor: pointer;
 }
 .pass-toggle:hover { background: var(--cream); color: var(--ink); }
+.hint { margin: 0; padding: 10px 12px; border-radius: 12px; background: var(--cream); color: var(--ink-2); font-size: 13px; }
 .back { align-self: center; color: var(--ink-2); font-size: 14px; text-decoration: none; margin-top: 4px; }
 .back:hover { color: var(--ink); text-decoration: underline; }
 
@@ -366,6 +367,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
         </div>
         <p v-if="loginErr" class="alert js-only" role="alert">{{ loginErr }}</p>
         <button class="btn primary block" type="submit" :disabled="loggingIn" v-text="loggingIn ? 'Connexion…' : 'Se connecter'">Se connecter</button>
+        <p class="hint no-js">Rien ne se passe en cliquant ? Ouvrez cette page depuis le site en ligne : un aperçu de fichier n’exécute pas le script de connexion.</p>
         <a href="../" class="back">← Retour au site</a>
       </form>
     </section>

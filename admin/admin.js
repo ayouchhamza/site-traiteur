@@ -29,15 +29,23 @@
   };
 
   async function authRequest(path, body) {
-    const res = await fetch(base + '/auth/v1/' + path, {
-      method: 'POST',
-      headers: { apikey: anonKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+    let res;
+    try {
+      res = await fetch(base + '/auth/v1/' + path, {
+        method: 'POST',
+        headers: { apikey: anonKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+    } catch (e) {
+      const err = new Error('serveur injoignable');
+      err.network = true;
+      throw err;
+    }
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       const err = new Error(data.error_description || data.msg || data.message || 'Erreur ' + res.status);
       err.status = res.status;
+      err.code = data.error_code || data.error || '';
       throw err;
     }
     return data;
@@ -54,6 +62,7 @@
   const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 
   document.querySelectorAll('.js-only').forEach((el) => el.classList.remove('js-only'));
+  document.querySelectorAll('.no-js').forEach((el) => el.remove());
 
   PetiteVue.createApp({
     configured: configured,
@@ -147,9 +156,15 @@
         this.showPass = false;
         await this.load();
       } catch (e) {
-        this.loginErr = e.status === 400 || e.status === 401
-          ? 'Identifiant ou mot de passe incorrect.'
-          : 'Connexion impossible pour le moment (' + e.message + ').';
+        if (e.code === 'email_not_confirmed') {
+          this.loginErr = 'Ce compte n’est pas encore confirmé. Dans Supabase › Authentication › Users, recréez l’utilisateur en cochant « Auto Confirm User ».';
+        } else if (e.network) {
+          this.loginErr = 'Impossible de joindre le serveur. Vérifiez la connexion Internet et ouvrez l’espace admin depuis le site en ligne.';
+        } else if (e.code === 'invalid_credentials' || e.status === 400 || e.status === 401) {
+          this.loginErr = 'Identifiant ou mot de passe incorrect.';
+        } else {
+          this.loginErr = 'Connexion impossible pour le moment (' + e.message + ').';
+        }
       } finally {
         this.loggingIn = false;
       }
