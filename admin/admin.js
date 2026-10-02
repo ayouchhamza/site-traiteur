@@ -53,6 +53,8 @@
   const csvCell = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
   const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 
+  document.querySelectorAll('.js-only').forEach((el) => el.classList.remove('js-only'));
+
   PetiteVue.createApp({
     configured: configured,
     session: configured ? savedSession.get() : null,
