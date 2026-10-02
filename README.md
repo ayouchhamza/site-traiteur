@@ -10,7 +10,7 @@ Pensé mobile d’abord (visiteurs venant d’Instagram), bilingue français / a
 
 ## Contenu
 
-Accueil · chiffres clés · prestations · galerie « Nos créations » (18 photos, filtrable) · déroulé en 4 étapes ·
+Accueil · chiffres clés · prestations · galerie « Nos créations » (33 photos, filtrable) · déroulé en 4 étapes ·
 témoignages · FAQ · formulaire de devis · pied de page (adresse, carte, horaires, réseaux) · bouton WhatsApp flottant.
 
 ## Structure

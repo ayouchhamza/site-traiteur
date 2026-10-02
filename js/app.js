@@ -85,12 +85,12 @@ class Component extends DCLogic {
       gallery: {
         eyebrow: 'Galerie',
         title: 'Nos créations',
-        intro: 'Bouchées raffinées, pastillas, plats de fête et buffets' + n + ': un aperçu de ce que nous servons à vos invités.',
+        intro: 'Bouchées raffinées, pastillas, plats de fête, buffets et décoration de table' + n + ': un aperçu de nos réceptions.',
         filterLabel: 'Filtrer la galerie',
-        filters: { all: 'Tout', bouchees: 'Bouchées', pastillas: 'Pastillas', plats: 'Plats', buffets: 'Buffets & desserts' },
+        filters: { all: 'Tout', bouchees: 'Bouchées', pastillas: 'Pastillas', plats: 'Plats', buffets: 'Buffets & desserts', deco: 'Décoration' },
         insta: 'Suivre sur Instagram',
         more: 'Voir toutes les photos',
-        items: ['Déclinaison foie gras à la mangue', 'Épaules d’agneau, daghmira, fruits confits et amandes', 'Céviché de dorade, sauce yuzu', 'Bouchées sur croquant au sésame noir et groseille', 'Tarte au bœuf, cheddar et crème d’herbes', 'Plateaux de fruits de mer en buffet', 'Pièce montée blanche aux roses', 'Pastillas au poulet et aux fruits de mer', 'Pastilla aux fruits de mer et langouste', 'Agneau rôti aux fruits secs et poires pochées', 'Poisson entier aux fruits de mer', 'Buffet froid' + n + ': roulés, sushis et salades', 'Pastillas fruits de mer et poulet aux noix', 'Pastilla au poulet et amandes', 'Pastillas et agneau aux poires', 'Buffet cocktail' + n + ': kebbé, sushis et feuilletés', 'Tajine d’agneau aux poires et fruits secs', 'Poulet aux citrons confits et noix de cajou']
+        items: ['Déclinaison foie gras à la mangue', 'Épaules d’agneau, daghmira, fruits confits et amandes', 'Céviché de dorade, sauce yuzu', 'Bouchées sur croquant au sésame noir et groseille', 'Tarte au bœuf, cheddar et crème d’herbes', 'Plateaux de fruits de mer en buffet', 'Pièce montée blanche aux roses', 'Pastillas au poulet et aux fruits de mer', 'Pastilla aux fruits de mer et langouste', 'Agneau rôti aux fruits secs et poires pochées', 'Poisson entier aux fruits de mer', 'Buffet froid' + n + ': roulés, sushis et salades', 'Pastillas fruits de mer et poulet aux noix', 'Pastilla au poulet et amandes', 'Pastillas et agneau aux poires', 'Buffet cocktail' + n + ': kebbé, sushis et feuilletés', 'Tajine d’agneau aux poires et fruits secs', 'Poulet aux citrons confits et noix de cajou', 'Plateau de fruits sculptés', 'Mignardises et macarons', 'Buffet de fruits frais', 'Petits fours sur présentoirs', 'Table d’honneur et scène des mariés', 'Salle dressée, tables rondes', 'Table d’honneur, roses rouges et chandeliers', 'Coin des mariés fleuri', 'Allée de lanternes marocaines', 'Table ronde dressée dans un riad', 'Art de la table, vaisselle dorée', 'Centre de table, roses blanches', 'Table ronde en blanc et or', 'Table impériale, roses pêche et bougies', 'Table en plein air, fleurs blanches et chandeliers']
       },
       steps: {
         eyebrow: 'Comment ça marche',
@@ -229,12 +229,12 @@ class Component extends DCLogic {
       gallery: {
         eyebrow: 'المعرض',
         title: 'إبداعاتنا',
-        intro: 'لقيمات راقية، بسطيلة، أطباق الأفراح وبوفيهات: لمحة عمّا نقدّمه لضيوفكم.',
+        intro: 'لقيمات راقية، بسطيلة، أطباق الأفراح، بوفيهات وتزيين الموائد: لمحة عن حفلاتنا.',
         filterLabel: 'تصفية المعرض',
-        filters: { all: 'الكل', bouchees: 'اللقيمات', pastillas: 'البسطيلة', plats: 'الأطباق', buffets: 'البوفيهات والحلويات' },
+        filters: { all: 'الكل', bouchees: 'اللقيمات', pastillas: 'البسطيلة', plats: 'الأطباق', buffets: 'البوفيهات والحلويات', deco: 'الديكور' },
         insta: 'تابعونا على إنستغرام',
         more: 'عرض كل الصور',
-        items: ['فوا غرا بالمانغو', 'كتف الخروف بالدغميرة والفواكه المعسّلة واللوز', 'سيفيتشي الدنيس بصلصة اليوزو', 'لقيمات على مقرمش السمسم الأسود مع الكشمش', 'تارت باللحم البقري والشيدر وكريمة الأعشاب', 'أطباق فواكه البحر في البوفيه', 'كعكة زفاف بيضاء بالورود', 'بسطيلة الدجاج وبسطيلة فواكه البحر', 'بسطيلة فواكه البحر باللانغوست', 'خروف محمّر بالفواكه الجافة والإجاص المسلوق', 'سمك كامل بفواكه البحر', 'بوفيه بارد: لفائف وسوشي وسلطات', 'بسطيلة فواكه البحر وبسطيلة الدجاج بالجوز', 'بسطيلة الدجاج باللوز', 'بسطيلة وخروف بالإجاص', 'بوفيه كوكتيل: كبة وسوشي ومورقات', 'طاجين الخروف بالإجاص والفواكه الجافة', 'دجاج بالحامض المرقد والكاجو']
+        items: ['فوا غرا بالمانغو', 'كتف الخروف بالدغميرة والفواكه المعسّلة واللوز', 'سيفيتشي الدنيس بصلصة اليوزو', 'لقيمات على مقرمش السمسم الأسود مع الكشمش', 'تارت باللحم البقري والشيدر وكريمة الأعشاب', 'أطباق فواكه البحر في البوفيه', 'كعكة زفاف بيضاء بالورود', 'بسطيلة الدجاج وبسطيلة فواكه البحر', 'بسطيلة فواكه البحر باللانغوست', 'خروف محمّر بالفواكه الجافة والإجاص المسلوق', 'سمك كامل بفواكه البحر', 'بوفيه بارد: لفائف وسوشي وسلطات', 'بسطيلة فواكه البحر وبسطيلة الدجاج بالجوز', 'بسطيلة الدجاج باللوز', 'بسطيلة وخروف بالإجاص', 'بوفيه كوكتيل: كبة وسوشي ومورقات', 'طاجين الخروف بالإجاص والفواكه الجافة', 'دجاج بالحامض المرقد والكاجو', 'طبق فواكه منحوتة', 'حلويات صغيرة وماكرون', 'بوفيه الفواكه الطازجة', 'حلويات صغيرة على حاملات', 'مائدة الشرف ومنصة العروسين', 'قاعة مجهّزة بموائد دائرية', 'مائدة الشرف بالورود الحمراء والشمعدانات', 'ركن العروسين المزيّن بالورود', 'ممر الفوانيس المغربية', 'مائدة دائرية في رياض', 'فن المائدة بأوانٍ مذهّبة', 'زينة المائدة بالورود البيضاء', 'مائدة دائرية بالأبيض والذهبي', 'مائدة طويلة بالورود الخوخية والشموع', 'مائدة في الهواء الطلق بالورود البيضاء والشمعدانات']
       },
       steps: {
         eyebrow: 'كيف نعمل',
@@ -372,20 +372,20 @@ class Component extends DCLogic {
       svc[key] = Object.assign({}, s, { pick: prefill(s.type, t.form.about + ' ' + s.title) });
     });
 
-    // Catégorie de chaque photo de la galerie (g1 … g18, dans l’ordre du balisage)
-    const GAL_CATS = ['bouchees', 'plats', 'bouchees', 'bouchees', 'bouchees', 'buffets', 'buffets', 'pastillas', 'pastillas', 'plats', 'plats', 'buffets', 'pastillas', 'pastillas', 'pastillas', 'buffets', 'plats', 'plats'];
+    // Photos de la galerie dans l’ordre d’affichage (g1 … g33) ; photo = numéro de la légende dans gallery.items
+    const GAL = [{ photo: 32, cat: 'deco' }, { photo: 1, cat: 'bouchees' }, { photo: 8, cat: 'pastillas' }, { photo: 27, cat: 'deco' }, { photo: 2, cat: 'plats' }, { photo: 21, cat: 'buffets' }, { photo: 33, cat: 'deco' }, { photo: 7, cat: 'buffets' }, { photo: 3, cat: 'bouchees' }, { photo: 25, cat: 'deco' }, { photo: 4, cat: 'bouchees' }, { photo: 5, cat: 'bouchees' }, { photo: 6, cat: 'buffets' }, { photo: 26, cat: 'deco' }, { photo: 9, cat: 'pastillas' }, { photo: 10, cat: 'plats' }, { photo: 28, cat: 'deco' }, { photo: 11, cat: 'plats' }, { photo: 12, cat: 'buffets' }, { photo: 22, cat: 'buffets' }, { photo: 13, cat: 'pastillas' }, { photo: 29, cat: 'deco' }, { photo: 14, cat: 'pastillas' }, { photo: 15, cat: 'pastillas' }, { photo: 23, cat: 'deco' }, { photo: 16, cat: 'buffets' }, { photo: 17, cat: 'plats' }, { photo: 30, cat: 'deco' }, { photo: 18, cat: 'plats' }, { photo: 19, cat: 'buffets' }, { photo: 20, cat: 'buffets' }, { photo: 24, cat: 'deco' }, { photo: 31, cat: 'deco' }];
     const GAL_PREVIEW = 8;
-    const galMatches = GAL_CATS.map((cat) => st.gal === 'all' || st.gal === cat);
+    const galMatches = GAL.map((g) => st.gal === 'all' || st.gal === g.cat);
     const galTotal = galMatches.filter(Boolean).length;
     const galLimit = st.galMore ? galTotal : GAL_PREVIEW;
     let galShown = 0;
     const gal = {};
-    GAL_CATS.forEach((cat, i) => {
+    GAL.forEach((g, i) => {
       const show = galMatches[i] && galShown < galLimit;
       if (show) galShown += 1;
-      gal['g' + (i + 1)] = { cap: t.gallery.items[i], show: show };
+      gal['g' + (i + 1)] = { cap: t.gallery.items[g.photo - 1], show: show };
     });
-    const galFilters = ['all', 'bouchees', 'pastillas', 'plats', 'buffets'].map((k) => {
+    const galFilters = ['all', 'bouchees', 'pastillas', 'plats', 'buffets', 'deco'].map((k) => {
       const on = st.gal === k;
       return {
         label: t.gallery.filters[k],
