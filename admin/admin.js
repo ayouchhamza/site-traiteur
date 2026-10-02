@@ -145,7 +145,7 @@
 
     async doLogin() {
       this.loginErr = '';
-      const user = this.login.user;
+      const user = this.login.user.trim().toLowerCase();
       const email = user.includes('@') ? user : user + '@' + (cfg.adminEmailDomain || '');
       this.loggingIn = true;
       try {
