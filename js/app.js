@@ -110,11 +110,12 @@ class Component extends DCLogic {
         prev: 'Avis précédent',
         next: 'Avis suivant',
         goto: 'Afficher l’avis',
+        note: 'Témoignages d’exemple' + n + ': site en cours de construction.',
         items: [
-          { tone: 'saffron', quote: 'Nos invités parlent encore de la pastilla et du méchoui. L’équipe a tout pris en main, du cocktail jusqu’au thé de fin de soirée, avec une discrétion remarquable. Nous avons vraiment pu profiter de notre mariage.', name: '[Prénom & Prénom]', event: 'Mariage · [lieu, mois année]' },
-          { tone: 'charcoal', quote: 'Pour notre soirée clients, il fallait conjuguer élégance et timing serré. Le cocktail dînatoire était à la fois raffiné et généreux, et le service d’une ponctualité parfaite.', name: '[Prénom N.], [Entreprise]', event: 'Soirée d’entreprise' },
-          { tone: 'olive', quote: 'La dégustation nous a permis d’ajuster chaque plat aux goûts de nos deux familles. Le jour J, la table était magnifique et tout s’est déroulé exactement comme prévu.', name: '[Prénom N.]', event: 'Fiançailles' },
-          { tone: 'rose', quote: 'Un buffet sucré superbe pour les soixante ans de ma mère' + n + ': cornes de gazelle, chebakia et un entremets à la pistache dont tout le monde a redemandé la recette.', name: '[Prénom N.]', event: 'Anniversaire' }
+          { tone: 'saffron', quote: 'Nos invités parlent encore de la pastilla et du méchoui. L’équipe a tout pris en main, du cocktail jusqu’au thé de fin de soirée, avec une discrétion remarquable. Nous avons vraiment pu profiter de notre mariage.', name: 'Salma & Youssef B.', event: 'Mariage · Casablanca' },
+          { tone: 'charcoal', quote: 'Pour notre soirée clients, il fallait conjuguer élégance et timing serré. Le cocktail dînatoire était à la fois raffiné et généreux, et le service d’une ponctualité parfaite.', name: 'Karim T., directeur marketing', event: 'Soirée d’entreprise' },
+          { tone: 'olive', quote: 'La dégustation nous a permis d’ajuster chaque plat aux goûts de nos deux familles. Le jour J, la table était magnifique et tout s’est déroulé exactement comme prévu.', name: 'Imane E.', event: 'Fiançailles' },
+          { tone: 'rose', quote: 'Un buffet sucré superbe pour les soixante ans de ma mère' + n + ': cornes de gazelle, chebakia et un entremets à la pistache dont tout le monde a redemandé la recette.', name: 'Nadia L.', event: 'Anniversaire' }
         ]
       },
       faq: {
@@ -246,11 +247,12 @@ class Component extends DCLogic {
         prev: 'الرأي السابق',
         next: 'الرأي التالي',
         goto: 'عرض الرأي',
+        note: 'آراء على سبيل المثال: الموقع قيد الإنشاء.',
         items: [
-          { tone: 'saffron', quote: 'ما زال ضيوفنا يتحدثون عن البسطيلة والمشوي. تكفّل الفريق بكل شيء، من الكوكتيل إلى شاي آخر السهرة، بلباقة لافتة. استمتعنا حقاً بعرسنا.', name: '[الاسم والاسم]', event: 'حفل زفاف · [المكان، الشهر والسنة]' },
-          { tone: 'charcoal', quote: 'في حفلنا مع زبنائنا، كان علينا الجمع بين الأناقة والتوقيت الدقيق. جاء الكوكتيل راقياً وسخيّاً في آن واحد، والخدمة منضبطة تماماً.', name: '[الاسم]، [الشركة]', event: 'حفل شركة' },
-          { tone: 'olive', quote: 'سمحت لنا جلسة التذوّق بضبط كل طبق على ذوق العائلتين. ويوم الحفل، كانت المائدة رائعة وجرى كل شيء كما اتفقنا تماماً.', name: '[الاسم]', event: 'خطوبة' },
-          { tone: 'rose', quote: 'مائدة حلوة رائعة لعيد ميلاد والدتي الستين: كعب غزال وشباكية وحلوى بالفستق طلب الجميع وصفتها.', name: '[الاسم]', event: 'عيد ميلاد' }
+          { tone: 'saffron', quote: 'ما زال ضيوفنا يتحدثون عن البسطيلة والمشوي. تكفّل الفريق بكل شيء، من الكوكتيل إلى شاي آخر السهرة، بلباقة لافتة. استمتعنا حقاً بعرسنا.', name: 'سلمى ويوسف ب.', event: 'حفل زفاف · الدار البيضاء' },
+          { tone: 'charcoal', quote: 'في حفلنا مع زبنائنا، كان علينا الجمع بين الأناقة والتوقيت الدقيق. جاء الكوكتيل راقياً وسخيّاً في آن واحد، والخدمة منضبطة تماماً.', name: 'كريم ت.، مدير التسويق', event: 'حفل شركة' },
+          { tone: 'olive', quote: 'سمحت لنا جلسة التذوّق بضبط كل طبق على ذوق العائلتين. ويوم الحفل، كانت المائدة رائعة وجرى كل شيء كما اتفقنا تماماً.', name: 'إيمان إ.', event: 'خطوبة' },
+          { tone: 'rose', quote: 'مائدة حلوة رائعة لعيد ميلاد والدتي الستين: كعب غزال وشباكية وحلوى بالفستق طلب الجميع وصفتها.', name: 'نادية ل.', event: 'عيد ميلاد' }
         ]
       },
       faq: {

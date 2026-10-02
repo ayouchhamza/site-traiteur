@@ -30,7 +30,8 @@ Tout est dans `js/app.js` :
 - `facts()` : nom, ville, téléphone / WhatsApp, e-mail, compte Instagram, adresse, chiffres clés, conditions (acompte, minimum d’invités…).
 - `copyFr()` et `copyAr()` : tous les textes du site, en français et en arabe.
 
-Les textes encore entre crochets (`[Adresse de l’atelier]`, noms des clients dans les avis, politique de dégustation) restent à compléter.
+Les avis clients sont des exemples avec des noms fictifs, signalés sur la page par la mention « Témoignages d’exemple » (`testi.note` dans `copyFr()` / `copyAr()`) : remplacer par de vrais avis, puis retirer la mention.
+Restent aussi à compléter entre crochets : `[Adresse de l’atelier]` et la politique de dégustation dans la FAQ.
 
 ## Avant une vraie mise en ligne
 
