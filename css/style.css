@@ -44,7 +44,7 @@ a:hover{color:inherit}
 .ms-plan-feat{transform:translateY(-16px)}
 .ms-gal{columns:4;column-gap:18px}
 .ms-gal figure{break-inside:avoid;margin:0 0 18px}
-.ms-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.ms-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
 .ms-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:80px}
 .ms-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
 .ms-span2{grid-column:1/-1}
@@ -70,7 +70,7 @@ a:hover{color:inherit}
 .ms-burger{display:inline-flex}
 .ms-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 .ms-gal{columns:3}
-.ms-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 32px}
+.ms-steps{gap:28px}
 .ms-split{gap:48px}
 .ms-plans{gap:16px}
 .ms-plan-feat{transform:none}

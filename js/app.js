@@ -95,13 +95,12 @@ class Component extends DCLogic {
       steps: {
         eyebrow: 'Comment ça marche',
         title: 'De la première conversation au jour J',
-        intro: 'Un accompagnement simple et attentif, en quatre étapes.',
+        intro: 'Un accompagnement simple et attentif, en trois étapes.',
         cta: 'Commencer par un message',
         items: [
           { n: '01', title: 'Prise de contact', text: 'Vous nous parlez de votre événement' + n + ': date, lieu, nombre d’invités, envies. Nous revenons vers vous rapidement avec une première proposition.' },
-          { n: '02', title: 'Dégustation', text: 'Nous vous recevons dans notre atelier pour goûter les plats pressentis, autour d’un thé. Le moment idéal pour affiner chaque saveur.' },
-          { n: '03', title: 'Personnalisation du menu', text: 'Menu, déroulé du service, vaisselle, décoration de table' + n + ': nous ajustons chaque détail et vous remettons le devis définitif.' },
-          { n: '04', title: 'Le jour J', text: 'Notre équipe arrive en amont, dresse, cuisine et sert. Vous profitez de vos invités, nous veillons à tout le reste.' }
+          { n: '02', title: 'Personnalisation du menu', text: 'Menu, déroulé du service, vaisselle, décoration de table' + n + ': nous ajustons chaque détail et vous remettons le devis définitif.' },
+          { n: '03', title: 'Le jour J', text: 'Notre équipe arrive en amont, dresse, cuisine et sert. Vous profitez de vos invités, nous veillons à tout le reste.' }
         ]
       },
       testi: {
@@ -239,13 +238,12 @@ class Component extends DCLogic {
       steps: {
         eyebrow: 'كيف نعمل',
         title: 'من أول محادثة إلى يوم الحفل',
-        intro: 'مرافقة بسيطة ودقيقة، في أربع مراحل.',
+        intro: 'مرافقة بسيطة ودقيقة، في ثلاث مراحل.',
         cta: 'ابدأوا برسالة',
         items: [
           { n: '01', title: 'التواصل', text: 'حدّثونا عن مناسبتكم: التاريخ والمكان وعدد الضيوف ورغباتكم. نعود إليكم باقتراح أوّلي في أقرب وقت.' },
-          { n: '02', title: 'التذوّق', text: 'نستقبلكم في مشغلنا لتذوّق الأطباق المقترحة على كأس شاي. إنها اللحظة المناسبة لضبط كل نكهة.' },
-          { n: '03', title: 'تخصيص القائمة', text: 'القائمة وسير الخدمة والأواني وزينة الموائد: نضبط كل تفصيل ونسلّمكم عرض السعر النهائي.' },
-          { n: '04', title: 'يوم الحفل', text: 'يصل فريقنا مبكراً، يُعدّ الموائد ويطبخ ويقدّم. استمتعوا بضيوفكم، ونحن نتكفّل بالباقي.' }
+          { n: '02', title: 'تخصيص القائمة', text: 'القائمة وسير الخدمة والأواني وزينة الموائد: نضبط كل تفصيل ونسلّمكم عرض السعر النهائي.' },
+          { n: '03', title: 'يوم الحفل', text: 'يصل فريقنا مبكراً، يُعدّ الموائد ويطبخ ويقدّم. استمتعوا بضيوفكم، ونحن نتكفّل بالباقي.' }
         ]
       },
       testi: {
