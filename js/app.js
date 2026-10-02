@@ -137,14 +137,7 @@ class Component extends DCLogic {
       quote: {
         eyebrow: 'Demande de devis',
         title: 'Parlons de votre événement',
-        intro: 'Quelques informations suffisent pour vous préparer une proposition sur mesure. Vous préférez échanger de vive voix' + n + '? Appelez-nous ou écrivez-nous sur WhatsApp.',
-        tel: 'Téléphone',
-        wa: 'WhatsApp',
-        waV: 'Réponse rapide par message',
-        mail: 'E-mail',
-        visit: 'Dégustations',
-        visitV: 'Sur rendez-vous à notre atelier',
-        assure: ['Une réponse personnalisée', 'Un devis détaillé et sans engagement', 'Une dégustation avant validation']
+        intro: 'Quelques informations suffisent pour vous préparer une proposition sur mesure. Vous préférez échanger de vive voix' + n + '? Appelez-nous ou écrivez-nous sur WhatsApp.'
       },
       form: {
         name: 'Nom complet', namePh: 'Prénom et nom',
@@ -280,14 +273,7 @@ class Component extends DCLogic {
       quote: {
         eyebrow: 'طلب عرض سعر',
         title: 'حدّثونا عن مناسبتكم',
-        intro: 'بضع معلومات تكفي لنُعدّ لكم اقتراحاً على المقاس. تفضّلون الحديث مباشرة؟ اتصلوا بنا أو راسلونا على واتساب.',
-        tel: 'الهاتف',
-        wa: 'واتساب',
-        waV: 'ردّ سريع عبر الرسائل',
-        mail: 'البريد الإلكتروني',
-        visit: 'جلسات التذوّق',
-        visitV: 'بموعد مسبق في مشغلنا',
-        assure: ['ردّ شخصي على طلبكم', 'عرض سعر مفصّل ودون التزام', 'جلسة تذوّق قبل المصادقة']
+        intro: 'بضع معلومات تكفي لنُعدّ لكم اقتراحاً على المقاس. تفضّلون الحديث مباشرة؟ اتصلوا بنا أو راسلونا على واتساب.'
       },
       form: {
         name: 'الاسم الكامل', namePh: 'الاسم والنسب',
