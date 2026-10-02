@@ -24,8 +24,8 @@ class Component extends DCLogic {
     return {
       brand: 'Traiteur Radi',
       city: { fr: 'Casablanca', ar: 'الدار البيضاء' },
-      phone: '+212 6 00 00 00 00',
-      wa: '212600000000',
+      phone: '07 66 75 34 02',
+      wa: '212766753402',
       email: 'contact@traiteurradi.ma',
       handle: 'traiteurradi',
       address: { fr: '[Adresse de l’atelier]', ar: '[عنوان المشغل]' },
