@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // /admin sans « / » final : les fichiers voisins (admin.js) seraient cherchés au mauvais endroit
+  if (!/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + '/' + location.hash);
+</script>
 <title>Espace admin — Traiteur Radi</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#1F1C19">

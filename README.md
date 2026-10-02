@@ -3,7 +3,7 @@
 Site one-page d’un traiteur haut de gamme à Casablanca : mariages, fiançailles, événements d’entreprise et réceptions privées.
 Pensé mobile d’abord (visiteurs venant d’Instagram), bilingue français / arabe avec mise en page de droite à gauche.
 
-**En ligne :** https://ayouchhamza.github.io/site-traiteur/
+**En ligne :** https://site-traiteur-one.vercel.app/ (hébergé sur Vercel, mis à jour à chaque push sur `main`)
 
 > ⚠️ Site de démonstration : la note moyenne, l’adresse et les avis clients sont **fictifs**.
 > La page est marquée `noindex` pour ne pas apparaître dans les moteurs de recherche tant que les vraies informations ne sont pas en place.
@@ -47,7 +47,7 @@ Restent aussi à compléter entre crochets : `[Adresse de l’atelier]` et la po
 ## Demandes de devis et espace admin
 
 Le formulaire enregistre chaque demande dans une base **Supabase** (gratuite) ; on les consulte sur
-**`/admin/`** (par exemple https://ayouchhamza.github.io/site-traiteur/admin/) avec un identifiant et un mot de passe.
+**`/admin/`** (https://site-traiteur-one.vercel.app/admin/) avec un identifiant et un mot de passe.
 Tant que la base n’est pas connectée, le formulaire affiche un message d’erreur avec le numéro de téléphone.
 
 Mise en place (une seule fois) :
