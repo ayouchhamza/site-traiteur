@@ -58,8 +58,8 @@ Mise en place (une seule fois) :
 4. **Authentication › Users › Add user** : e-mail `admin@traiteurradi.ma`, un mot de passe solide, cocher **Auto Confirm User**.
    Dans l’espace admin, l’identifiant `admin` suffit (le domaine est ajouté automatiquement).
    Autre e-mail ? Le remplacer aussi dans `public.is_admin()` de `supabase/schema.sql`, puis relancer le script.
-5. **Project Settings › API** : copier **Project URL** et la clé **anon public** dans `js/config.js`.
-   Ne jamais y mettre la clé `service_role`.
+5. **Project Settings › API** : copier **Project URL** et la clé **publishable** (`sb_publishable_…`, ou l’ancienne clé **anon public**) dans `js/config.js`.
+   Ne jamais y mettre la clé secrète (`sb_secret_…` ou `service_role`).
 
 Dans l’espace admin : statut de chaque demande (Nouveau, En cours, Traité), recherche, filtres, suppression et export CSV pour Excel.
 Les visiteurs ne peuvent qu’envoyer une demande : lire, modifier ou supprimer est réservé au compte admin (règles RLS de Supabase).

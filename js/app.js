@@ -532,7 +532,7 @@ Component.prototype.sendQuote = function (payload) {
   }
   return fetch(base + '/rest/v1/devis', {
     method: 'POST',
-    headers: { apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    headers: { apikey: key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
     body: JSON.stringify(payload)
   }).then((res) => {
     if (!res.ok) throw new Error('Erreur ' + res.status);
