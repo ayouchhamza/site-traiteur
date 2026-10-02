@@ -1,6 +1,6 @@
 # Traiteur Radi — site traiteur
 
-Site one-page d’un traiteur haut de gamme à Marrakech : mariages, fiançailles, événements d’entreprise et réceptions privées.
+Site one-page d’un traiteur haut de gamme à Casablanca : mariages, fiançailles, événements d’entreprise et réceptions privées.
 Pensé mobile d’abord (visiteurs venant d’Instagram), bilingue français / arabe avec mise en page de droite à gauche.
 
 **En ligne :** https://ayouchhamza.github.io/site-traiteur/

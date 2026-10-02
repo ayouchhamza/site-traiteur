@@ -23,7 +23,7 @@ class Component extends DCLogic {
   facts() {
     return {
       brand: 'Traiteur Radi',
-      city: { fr: 'Marrakech', ar: 'مراكش' },
+      city: { fr: 'Casablanca', ar: 'الدار البيضاء' },
       phone: '+212 6 00 00 00 00',
       wa: '212600000000',
       email: 'contact@traiteurradi.ma',
