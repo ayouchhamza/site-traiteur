@@ -5,7 +5,7 @@ Pensé mobile d’abord (visiteurs venant d’Instagram), bilingue français / a
 
 **En ligne :** https://ayouchhamza.github.io/site-traiteur/
 
-> ⚠️ Site de démonstration : les chiffres clés, le numéro WhatsApp, l’adresse et les avis clients sont **fictifs**.
+> ⚠️ Site de démonstration : la note moyenne, le numéro WhatsApp, l’adresse et les avis clients sont **fictifs**.
 > La page est marquée `noindex` pour ne pas apparaître dans les moteurs de recherche tant que les vraies informations ne sont pas en place.
 
 ## Contenu
