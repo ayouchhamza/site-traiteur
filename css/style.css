@@ -84,7 +84,7 @@ a:hover{color:inherit}
 .ms-headbar{height:64px}
 .ms-head-cta{display:none}
 .ms-hide-m{display:none !important}
-.ms-brand{font-size:21px !important;white-space:nowrap}
+.ms-brand{font-size:16px !important;letter-spacing:.06em !important;white-space:nowrap}
 .ms-hero-in{padding-top:112px;padding-bottom:112px}
 .ms-hero-ctas>a{flex:1 1 100%}
 .ms-hero-shade,[dir=rtl] .ms-hero-shade{background:rgba(24,18,14,.5)}
@@ -95,7 +95,7 @@ a:hover{color:inherit}
 .ms-plans{grid-template-columns:minmax(0,1fr)}
 .ms-gal{columns:2;column-gap:10px}
 .ms-gal figure{margin-bottom:10px}
-.ms-gal figcaption{bottom:6px !important;inset-inline-start:6px !important;max-width:calc(100% - 12px) !important;padding:4px 8px !important;font-size:10.5px !important}
+.ms-gal figcaption{padding:8px 2px 0 !important;font-size:12px !important}
 .ms-steps{grid-template-columns:minmax(0,1fr);gap:36px}
 .ms-split{grid-template-columns:minmax(0,1fr);gap:40px}
 .ms-form-grid{grid-template-columns:minmax(0,1fr)}

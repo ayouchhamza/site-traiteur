@@ -1,5 +1,5 @@
 /*
- * Site Maison Safran : le composant de la maquette (classe Component, conçue dans le canevas Design)
+ * Site Traiteur Radi : le composant de la maquette (classe Component, conçue dans le canevas Design)
  * piloté ici par petite-vue. Les textes FR/AR et les infos de l’entreprise sont dans facts(), copyFr() et copyAr().
  */
 class DCLogic {
@@ -12,7 +12,7 @@ class DCLogic {
 class Component extends DCLogic {
   constructor(...args) {
     super(...args);
-    this.state = { lang: null, menu: false, gal: 'all', slide: 0, faq: 0, sent: false, err: false, form: this.blankForm() };
+    this.state = { lang: null, menu: false, gal: 'all', galMore: false, slide: 0, faq: 0, sent: false, err: false, form: this.blankForm() };
   }
 
   blankForm() {
@@ -22,19 +22,18 @@ class Component extends DCLogic {
   // Informations de l’entreprise (valeurs fictives de démonstration) : remplacer par les vraies.
   facts() {
     return {
-      brand: 'Maison Safran',
+      brand: 'Traiteur Radi',
       city: { fr: 'Marrakech', ar: 'مراكش' },
       phone: '+212 6 00 00 00 00',
       wa: '212600000000',
-      email: 'contact@maisonsafran.ma',
-      handle: 'maisonsafran',
+      email: 'contact@traiteurradi.ma',
+      handle: 'traiteurradi',
       address: { fr: '[Adresse de l’atelier]', ar: '[عنوان المشغل]' },
       years: '12',
       events: '1\u00a0200',
       guests: '180\u00a0000',
       rating: '4,9',
       reviews: '120',
-      price: { essentiel: '350', prestige: '550', royal: '850' },
       minGuests: '30',
       radius: '100',
       tastingMax: '4',
@@ -48,12 +47,11 @@ class Component extends DCLogic {
     const n = ' ';
     return {
       sep: n + ': ',
-      tagline: 'Traiteur · ' + city,
+      tagline: 'Réceptions · ' + city,
       langLabel: 'Choisir la langue',
       navAria: 'Navigation principale',
       nav: [
         { id: 'prestations', label: 'Prestations' },
-        { id: 'formules', label: 'Formules' },
         { id: 'galerie', label: 'Galerie' },
         { id: 'deroule', label: 'Déroulé' },
         { id: 'avis', label: 'Avis' },
@@ -84,30 +82,15 @@ class Component extends DCLogic {
           { type: 'autre', tone: 'rose', title: 'Pâtisseries & sucré', text: 'Cornes de gazelle, ghriba et chebakia, mais aussi entremets, macarons et pièces montées' + n + ': un buffet sucré qui célèbre les deux rives de la Méditerranée.', cta: 'Composer mon buffet sucré', photo: 'Plateau de pâtisseries marocaines traditionnelles' }
         ]
       },
-      plans: {
-        eyebrow: 'Menus & formules',
-        title: 'Trois façons de recevoir',
-        intro: 'Chaque formule est une base de travail' + n + ': nous l’ajustons à votre nombre d’invités, à votre lieu et à vos envies lors de la dégustation.',
-        from: 'à partir de',
-        unit: 'DH',
-        per: '/ personne',
-        featured: 'Notre coup de cœur',
-        cta: 'Demander un devis',
-        note: 'Tarifs indicatifs par personne, établis pour un minimum de ' + F.minGuests + ' invités, hors location de salle. Chaque devis est détaillé et sans engagement.',
-        items: [
-          { key: 'essentiel', name: 'Essentiel', desc: 'Le meilleur de la cuisine marocaine, pour des réceptions conviviales et généreuses.', head: 'Ce qui est inclus', incl: ['Accueil avec jus frais et bouchées salées', 'Assortiment de salades marocaines', 'Tajine au choix' + n + ': poulet aux citrons confits ou kefta', 'Fruits de saison, pâtisseries maison et thé à la menthe', 'Service, vaisselle et nappage'] },
-          { key: 'prestige', name: 'Prestige', desc: 'Notre formule signature pour les mariages et les grandes réceptions.', head: 'Tout l’Essentiel, plus', incl: ['Cocktail dînatoire de 8 pièces salées et sucrées', 'Pastilla poulet-amandes en entrée chaude', 'Méchoui d’agneau et tajine de veau aux pruneaux', 'Buffet de pâtisseries marocaines et françaises', 'Maître d’hôtel et cérémonie du thé en tenue'] },
-          { key: 'royal', name: 'Royal', desc: 'Une expérience d’exception, pensée dans ses moindres détails.', head: 'Tout le Prestige, plus', incl: ['Ateliers live' + n + ': msemen, grillades et bar à jus', 'Pastillas aux fruits de mer et au pigeon', 'Méchoui entier découpé devant vos invités', 'Pièce montée ou wedding cake sur mesure', 'Vaisselle dorée, chandeliers et coordinateur dédié'] }
-        ]
-      },
       gallery: {
         eyebrow: 'Galerie',
-        title: 'Nos tables en images',
-        intro: 'Plats signature, buffets, décoration et service' + n + ': un aperçu de ce que nous préparons pour vos invités.',
+        title: 'Nos créations',
+        intro: 'Bouchées raffinées, pastillas, plats de fête et buffets' + n + ': un aperçu de ce que nous servons à vos invités.',
         filterLabel: 'Filtrer la galerie',
-        filters: { all: 'Tout', plats: 'Plats', buffets: 'Buffets', deco: 'Décoration', service: 'Service' },
+        filters: { all: 'Tout', bouchees: 'Bouchées', pastillas: 'Pastillas', plats: 'Plats', buffets: 'Buffets & desserts' },
         insta: 'Suivre sur Instagram',
-        items: ['Tajine servi sur table en zellige', 'Salades marocaines et tajines', 'Table d’honneur, fleurs et cristal', 'Service du thé à la menthe', 'Bouchées du cocktail dînatoire', 'Agneau rôti et ses accompagnements', 'Chemin de table, verdure et bougies', 'Découpe à la minute devant les invités', 'Kefta grillée et légumes du marché', 'Buffet de desserts']
+        more: 'Voir toutes les photos',
+        items: ['Déclinaison foie gras à la mangue', 'Épaules d’agneau, daghmira, fruits confits et amandes', 'Céviché de dorade, sauce yuzu', 'Bouchées sur croquant au sésame noir et groseille', 'Tarte au bœuf, cheddar et crème d’herbes', 'Plateaux de fruits de mer en buffet', 'Pièce montée blanche aux roses', 'Pastillas au poulet et aux fruits de mer', 'Pastilla aux fruits de mer et langouste', 'Agneau rôti aux fruits secs et poires pochées', 'Poisson entier aux fruits de mer', 'Buffet froid' + n + ': roulés, sushis et salades', 'Pastillas fruits de mer et poulet aux noix', 'Pastilla au poulet et amandes', 'Pastillas et agneau aux poires', 'Buffet cocktail' + n + ': kebbé, sushis et feuilletés', 'Tajine d’agneau aux poires et fruits secs', 'Poulet aux citrons confits et noix de cajou']
       },
       steps: {
         eyebrow: 'Comment ça marche',
@@ -144,10 +127,10 @@ class Component extends DCLogic {
         asideCta: 'Poser ma question',
         items: [
           { q: 'Quelle zone desservez-vous' + n + '?', a: 'Nous intervenons à ' + city + ' et dans un rayon de ' + F.radius + ' km, et partout au Maroc sur demande. Les éventuels frais de déplacement sont indiqués clairement dans le devis.' },
-          { q: 'Y a-t-il un nombre minimum d’invités' + n + '?', a: 'Nos formules sont pensées à partir de ' + F.minGuests + ' invités. Pour une réception plus intime, nous composons volontiers un menu sur mesure' + n + ': parlons-en.' },
-          { q: 'Peut-on organiser une dégustation' + n + '?', a: 'Oui. Une fois la date et la formule pressenties, nous vous recevons pour une dégustation dans notre atelier, jusqu’à ' + F.tastingMax + ' personnes. Elle est [offerte / déduite de la facture] en cas de signature.' },
+          { q: 'Y a-t-il un nombre minimum d’invités' + n + '?', a: 'Nos menus sont pensés à partir de ' + F.minGuests + ' invités. Pour une réception plus intime, nous composons volontiers un menu sur mesure' + n + ': parlons-en.' },
+          { q: 'Peut-on organiser une dégustation' + n + '?', a: 'Oui. Une fois la date et le menu pressentis, nous vous recevons pour une dégustation dans notre atelier, jusqu’à ' + F.tastingMax + ' personnes. Elle est [offerte / déduite de la facture] en cas de signature.' },
           { q: 'Quel acompte faut-il verser pour réserver' + n + '?', a: 'La date est bloquée à réception d’un acompte de ' + F.deposit + n + '% du montant du devis' + n + '; le solde est réglé ' + F.balanceDays + ' jours avant l’événement. Les modalités de paiement sont précisées dans le devis.' },
-          { q: 'Le service et la vaisselle sont-ils inclus' + n + '?', a: 'Oui' + n + ': toutes nos formules comprennent le personnel de service, la vaisselle, les couverts, la verrerie et le nappage. Mobilier, décoration florale et éclairage peuvent être ajoutés en option.' },
+          { q: 'Le service et la vaisselle sont-ils inclus' + n + '?', a: 'Oui' + n + ': toutes nos prestations comprennent le personnel de service, la vaisselle, les couverts, la verrerie et le nappage. Mobilier, décoration florale et éclairage peuvent être ajoutés en option.' },
           { q: 'Pouvez-vous adapter le menu à des régimes particuliers' + n + '?', a: 'Bien sûr' + n + ': végétarien, sans gluten, allergies ou menu enfant. Tous nos plats sont préparés à partir de produits frais et de saison.' },
           { q: 'Combien de temps à l’avance faut-il réserver' + n + '?', a: 'Pour un mariage, nous conseillons de nous contacter 6 à 12 mois à l’avance, surtout en haute saison. Pour un événement d’entreprise ou une réception privée, quelques semaines suffisent souvent.' }
         ]
@@ -183,7 +166,6 @@ class Component extends DCLogic {
         okWa: 'Envoyer le récapitulatif sur WhatsApp',
         again: 'Faire une nouvelle demande',
         about: 'Prestation souhaitée' + n + ':',
-        aboutPlan: 'Formule souhaitée' + n + ':',
         waIntro: 'Bonjour ' + F.brand + ', je souhaite recevoir un devis.'
       },
       footer: {
@@ -197,7 +179,7 @@ class Component extends DCLogic {
         follow: 'Suivez-nous',
         map: 'Carte Google Maps',
         mapLink: 'Itinéraire',
-        rights: '© 2026 ' + F.brand + ' · Traiteur à ' + city,
+        rights: '© 2026 ' + F.brand + ' · ' + city,
         legal: 'Mentions légales',
         privacy: 'Confidentialité',
         photos: 'Photos : Unsplash'
@@ -209,12 +191,11 @@ class Component extends DCLogic {
     const city = F.city.ar;
     return {
       sep: ': ',
-      tagline: 'ممون حفلات · ' + city,
+      tagline: 'حفلات ومناسبات · ' + city,
       langLabel: 'اختيار اللغة',
       navAria: 'القائمة الرئيسية',
       nav: [
         { id: 'prestations', label: 'الخدمات' },
-        { id: 'formules', label: 'الباقات' },
         { id: 'galerie', label: 'المعرض' },
         { id: 'deroule', label: 'المراحل' },
         { id: 'avis', label: 'الآراء' },
@@ -245,30 +226,15 @@ class Component extends DCLogic {
           { type: 'autre', tone: 'rose', title: 'الحلويات والمائدة الحلوة', text: 'كعب غزال وغريبة وشباكية، وأيضاً حلويات فرنسية وماكرون وكعكات على المقاس: مائدة حلوة تحتفي بضفّتي المتوسط.', cta: 'تكوين مائدتي الحلوة', photo: 'صينية حلويات مغربية تقليدية' }
         ]
       },
-      plans: {
-        eyebrow: 'القوائم والباقات',
-        title: 'ثلاث طرق للاستقبال',
-        intro: 'كل باقة نقطة انطلاق: نكيّفها حسب عدد ضيوفكم ومكان الحفل ورغباتكم خلال جلسة التذوّق.',
-        from: 'ابتداءً من',
-        unit: 'درهم',
-        per: '/ للشخص',
-        featured: 'اختيارنا المفضّل',
-        cta: 'اطلب عرض سعر',
-        note: 'أسعار تقريبية للشخص الواحد، محسوبة على أساس ' + F.minGuests + ' ضيفاً على الأقل، دون احتساب كراء القاعة. كل عرض سعر مفصّل ودون أي التزام.',
-        items: [
-          { key: 'essentiel', name: 'الأساسية', desc: 'أفضل ما في المطبخ المغربي، لاستقبالات ودّية وسخيّة.', head: 'ما تشمله', incl: ['استقبال بالعصائر الطازجة والمملّحات', 'تشكيلة من السلطات المغربية', 'طاجين حسب الاختيار: دجاج بالحامض المرقد أو كفتة', 'فواكه الموسم وحلويات منزلية وشاي بالنعناع', 'الخدمة والأواني والمفارش'] },
-          { key: 'prestige', name: 'المتميّزة', desc: 'باقتنا المميّزة للأعراس والاستقبالات الكبرى.', head: 'كل ما في الأساسية، مع', incl: ['كوكتيل من 8 قطع مالحة وحلوة', 'بسطيلة الدجاج واللوز كطبق ساخن', 'مشوي الخروف وطاجين العجل بالبرقوق', 'بوفيه حلويات مغربية وفرنسية', 'رئيس خدمة وطقوس الشاي بلباس تقليدي'] },
-          { key: 'royal', name: 'الملكية', desc: 'تجربة استثنائية، مدروسة في أدقّ تفاصيلها.', head: 'كل ما في المتميّزة، مع', incl: ['ورشات مباشرة: مسمن ومشويات وركن العصائر', 'بسطيلة فواكه البحر وبسطيلة الحمام', 'خروف مشوي كامل يُقطَّع أمام ضيوفكم', 'كعكة زفاف أو قطعة مركّبة على المقاس', 'أوانٍ مذهّبة وشمعدانات ومنسّق خاص'] }
-        ]
-      },
       gallery: {
         eyebrow: 'المعرض',
-        title: 'موائدنا بالصور',
-        intro: 'أطباق مميّزة، بوفيهات، ديكور وخدمة: لمحة عمّا نُعدّه لضيوفكم.',
+        title: 'إبداعاتنا',
+        intro: 'لقيمات راقية، بسطيلة، أطباق الأفراح وبوفيهات: لمحة عمّا نقدّمه لضيوفكم.',
         filterLabel: 'تصفية المعرض',
-        filters: { all: 'الكل', plats: 'الأطباق', buffets: 'البوفيهات', deco: 'الديكور', service: 'الخدمة' },
+        filters: { all: 'الكل', bouchees: 'اللقيمات', pastillas: 'البسطيلة', plats: 'الأطباق', buffets: 'البوفيهات والحلويات' },
         insta: 'تابعونا على إنستغرام',
-        items: ['طاجين يُقدَّم على مائدة من الزليج', 'سلطات مغربية وطواجن', 'مائدة الشرف بالورود والكريستال', 'تقديم الشاي بالنعناع', 'لقيمات الكوكتيل', 'لحم خروف مشوي ومرافقاته', 'زينة المائدة بالخضرة والشموع', 'التقطيع أمام الضيوف', 'كفتة مشوية وخضر السوق', 'بوفيه الحلويات']
+        more: 'عرض كل الصور',
+        items: ['فوا غرا بالمانغو', 'كتف الخروف بالدغميرة والفواكه المعسّلة واللوز', 'سيفيتشي الدنيس بصلصة اليوزو', 'لقيمات على مقرمش السمسم الأسود مع الكشمش', 'تارت باللحم البقري والشيدر وكريمة الأعشاب', 'أطباق فواكه البحر في البوفيه', 'كعكة زفاف بيضاء بالورود', 'بسطيلة الدجاج وبسطيلة فواكه البحر', 'بسطيلة فواكه البحر باللانغوست', 'خروف محمّر بالفواكه الجافة والإجاص المسلوق', 'سمك كامل بفواكه البحر', 'بوفيه بارد: لفائف وسوشي وسلطات', 'بسطيلة فواكه البحر وبسطيلة الدجاج بالجوز', 'بسطيلة الدجاج باللوز', 'بسطيلة وخروف بالإجاص', 'بوفيه كوكتيل: كبة وسوشي ومورقات', 'طاجين الخروف بالإجاص والفواكه الجافة', 'دجاج بالحامض المرقد والكاجو']
       },
       steps: {
         eyebrow: 'كيف نعمل',
@@ -305,10 +271,10 @@ class Component extends DCLogic {
         asideCta: 'اطرح سؤالك',
         items: [
           { q: 'ما هي المناطق التي تشتغلون فيها؟', a: 'نشتغل في ' + city + ' وضواحيها في حدود ' + F.radius + ' كلم، وفي باقي مدن المغرب حسب الطلب. تُذكر مصاريف التنقّل، إن وُجدت، بوضوح في عرض السعر.' },
-          { q: 'هل هناك حدّ أدنى لعدد الضيوف؟', a: 'باقاتنا مصمَّمة ابتداءً من ' + F.minGuests + ' ضيفاً. وللاستقبالات الأصغر، نُعدّ بكل سرور قائمة على المقاس: تواصلوا معنا.' },
-          { q: 'هل يمكن تذوّق الأطباق قبل الحجز؟', a: 'نعم. بعد تحديد التاريخ والباقة المبدئية، نستقبلكم لجلسة تذوّق في مشغلنا، لـ' + F.tastingMax + ' أشخاص كحدّ أقصى. وتكون [مجانية / مخصومة من الفاتورة] عند التوقيع.' },
+          { q: 'هل هناك حدّ أدنى لعدد الضيوف؟', a: 'قوائمنا مصمَّمة ابتداءً من ' + F.minGuests + ' ضيفاً. وللاستقبالات الأصغر، نُعدّ بكل سرور قائمة على المقاس: تواصلوا معنا.' },
+          { q: 'هل يمكن تذوّق الأطباق قبل الحجز؟', a: 'نعم. بعد تحديد التاريخ والقائمة المبدئية، نستقبلكم لجلسة تذوّق في مشغلنا، لـ' + F.tastingMax + ' أشخاص كحدّ أقصى. وتكون [مجانية / مخصومة من الفاتورة] عند التوقيع.' },
           { q: 'ما قيمة العربون المطلوب للحجز؟', a: 'يُحجز التاريخ عند التوصّل بعربون قدره ' + F.deposit + '٪ من مبلغ عرض السعر، ويُسدَّد الباقي قبل الحفل بـ' + F.balanceDays + ' أيام. طرق الأداء موضّحة في عرض السعر.' },
-          { q: 'هل الخدمة والأواني مشمولة؟', a: 'نعم، تشمل جميع باقاتنا طاقم الخدمة والأواني وأدوات المائدة والكؤوس والمفارش. ويمكن إضافة الأثاث والزينة بالورود والإضاءة كخيارات إضافية.' },
+          { q: 'هل الخدمة والأواني مشمولة؟', a: 'نعم، تشمل جميع خدماتنا طاقم الخدمة والأواني وأدوات المائدة والكؤوس والمفارش. ويمكن إضافة الأثاث والزينة بالورود والإضاءة كخيارات إضافية.' },
           { q: 'هل يمكن تكييف القائمة مع أنظمة غذائية خاصة؟', a: 'بالتأكيد: نباتي، خالٍ من الغلوتين، حساسية غذائية أو قائمة للأطفال. كل أطباقنا محضّرة بمنتجات طازجة وموسمية.' },
           { q: 'متى يجب الحجز مسبقاً؟', a: 'بالنسبة للأعراس، ننصح بالتواصل معنا قبل 6 إلى 12 شهراً، خاصة في موسم الذروة. أما مناسبات الشركات والحفلات الخاصة، فبضعة أسابيع تكفي غالباً.' }
         ]
@@ -344,7 +310,6 @@ class Component extends DCLogic {
         okWa: 'إرسال الملخّص عبر واتساب',
         again: 'تقديم طلب جديد',
         about: 'الخدمة المطلوبة:',
-        aboutPlan: 'الباقة المطلوبة:',
         waIntro: 'السلام عليكم ' + F.brand + '، أرغب في الحصول على عرض سعر.'
       },
       footer: {
@@ -407,33 +372,20 @@ class Component extends DCLogic {
       svc[key] = Object.assign({}, s, { pick: prefill(s.type, t.form.about + ' ' + s.title) });
     });
 
-    const plans = t.plans.items.map((p, i) => {
-      const feat = i === 1;
-      return Object.assign({}, p, {
-        price: F.price[p.key],
-        featured: feat,
-        cls: feat ? 'ms-plan-feat' : '',
-        bg: feat ? '#1F1C19' : '#FFFDF8',
-        fg: feat ? '#F3ECE0' : '#26231F',
-        muted: feat ? '#BDB3A3' : '#5B544B',
-        line: feat ? 'rgba(243,236,224,.16)' : '#E6D9C3',
-        border: feat ? '#1F1C19' : '#E6D9C3',
-        shadow: feat ? '0 40px 80px -40px rgba(31,28,25,.55)' : 'none',
-        gold: feat ? '#D1AE74' : '#84622E',
-        btnBg: feat ? '#A9512F' : 'transparent',
-        btnFg: feat ? '#FBF7F0' : '#26231F',
-        btnBorder: feat ? '#A9512F' : '#26231F',
-        pick: prefill('', t.form.aboutPlan + ' ' + p.name)
-      });
-    });
-
-    // Catégorie de chaque photo de la galerie (g1 … g10, dans l’ordre du balisage)
-    const GAL_CATS = ['plats', 'buffets', 'deco', 'service', 'buffets', 'plats', 'deco', 'service', 'plats', 'buffets'];
+    // Catégorie de chaque photo de la galerie (g1 … g18, dans l’ordre du balisage)
+    const GAL_CATS = ['bouchees', 'plats', 'bouchees', 'bouchees', 'bouchees', 'buffets', 'buffets', 'pastillas', 'pastillas', 'plats', 'plats', 'buffets', 'pastillas', 'pastillas', 'pastillas', 'buffets', 'plats', 'plats'];
+    const GAL_PREVIEW = 8;
+    const galMatches = GAL_CATS.map((cat) => st.gal === 'all' || st.gal === cat);
+    const galTotal = galMatches.filter(Boolean).length;
+    const galLimit = st.galMore ? galTotal : GAL_PREVIEW;
+    let galShown = 0;
     const gal = {};
     GAL_CATS.forEach((cat, i) => {
-      gal['g' + (i + 1)] = { cap: t.gallery.items[i], show: st.gal === 'all' || st.gal === cat };
+      const show = galMatches[i] && galShown < galLimit;
+      if (show) galShown += 1;
+      gal['g' + (i + 1)] = { cap: t.gallery.items[i], show: show };
     });
-    const galFilters = ['all', 'plats', 'buffets', 'deco', 'service'].map((k) => {
+    const galFilters = ['all', 'bouchees', 'pastillas', 'plats', 'buffets'].map((k) => {
       const on = st.gal === k;
       return {
         label: t.gallery.filters[k],
@@ -533,8 +485,10 @@ class Component extends DCLogic {
 
       stats: stats,
       svc: svc,
-      plans: plans,
       gal: gal,
+      galCanMore: galTotal > galShown,
+      galMoreLabel: t.gallery.more + ' (' + galTotal + ')',
+      showMore: () => this.setState({ galMore: true }),
       galFilters: galFilters,
       slide: slide,
       dots: dots,
