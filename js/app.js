@@ -186,10 +186,10 @@ class Component extends DCLogic {
         follow: 'Suivez-nous',
         map: 'Carte Google Maps',
         mapLink: 'Itinéraire',
-        rights: '© 2026 ' + F.brand + ' · ' + city,
+        rights: '© 2026 ' + F.brand + '. Tous droits réservés.',
         legal: 'Mentions légales',
         privacy: 'Confidentialité',
-        photos: 'Photos : Unsplash'
+        madeBy: 'Créé par'
       }
     };
   }
@@ -320,10 +320,10 @@ class Component extends DCLogic {
         follow: 'تابعونا',
         map: 'خريطة Google Maps',
         mapLink: 'المسار',
-        rights: '© 2026 ' + F.brand + ' · ممون حفلات في ' + city,
+        rights: '© 2026 ' + F.brand + '. جميع الحقوق محفوظة.',
         legal: 'الإشعار القانوني',
         privacy: 'سياسة الخصوصية',
-        photos: 'الصور: Unsplash'
+        madeBy: 'تصميم'
       }
     };
   }
