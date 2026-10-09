@@ -536,6 +536,7 @@ Component.prototype.sendQuote = function (payload) {
     body: JSON.stringify(payload)
   }).then((res) => {
     if (!res.ok) throw new Error('Erreur ' + res.status);
+    if (window.trTrack) window.trTrack('Lead', { content_category: payload.type_evenement });
   });
 };
 

@@ -6,5 +6,7 @@ window.TR_CONFIG = {
   supabaseUrl: 'https://lbdglxtclsunppvbnaln.supabase.co',
   supabaseAnonKey: 'sb_publishable_KICDeGkfWEW5qgYESMlScg_BZWwAbMc',
   // Dans l’espace admin, un identifiant sans « @ » reçoit ce domaine : admin → admin@traiteurradi.ma
-  adminEmailDomain: 'traiteurradi.ma'
+  adminEmailDomain: 'traiteurradi.ma',
+  // Pixel Meta (Gestionnaire d’événements › Sources de données) : identifiant à 15-16 chiffres ; vide = désactivé
+  metaPixelId: ''
 };

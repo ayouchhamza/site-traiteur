@@ -64,6 +64,12 @@ Mise en place (une seule fois) :
 Dans l’espace admin : statut de chaque demande (Nouveau, En cours, Traité), recherche, filtres, suppression et export CSV pour Excel.
 Les visiteurs ne peuvent qu’envoyer une demande : lire, modifier ou supprimer est réservé au compte admin (règles RLS de Supabase).
 
+## Pixel Meta (publicités Facebook / Instagram)
+
+Mettre l’identifiant du Pixel (Meta › Gestionnaire d’événements › Sources de données, 15-16 chiffres) dans `metaPixelId` de `js/config.js`.
+Événements envoyés par `js/pixel.js` : **PageView** (chaque visite), **Lead** (demande de devis enregistrée), **Contact** (clic WhatsApp ou téléphone).
+Vide = pixel désactivé. L’espace admin n’est pas suivi.
+
 ## Aperçu en local
 
 ```bash
