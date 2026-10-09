@@ -8,5 +8,5 @@ window.TR_CONFIG = {
   // Dans l’espace admin, un identifiant sans « @ » reçoit ce domaine : admin → admin@traiteurradi.ma
   adminEmailDomain: 'traiteurradi.ma',
   // Pixel Meta (Gestionnaire d’événements › Sources de données) : identifiant à 15-16 chiffres ; vide = désactivé
-  metaPixelId: ''
+  metaPixelId: '2633792993727689'
 };
